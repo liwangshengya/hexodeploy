@@ -1,0 +1,366 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>keras实现手写数字识别 | Hexo</title><meta name="keywords" content="机器学习,神经网络,Keras,TensorFlow"><meta name="author" content="忘生啊"><meta name="copyright" content="忘生啊"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="TensorFlow和Kears的安装 Keras是基于TensorFlow和Theano（由加拿大蒙特利尔大学开发的机器学习框架）的深度学习库，是由纯python编写而成的高层神经网络API，也仅支持python开发。它是为了支持快速实践而对tensorflow或者Theano的再次封装，让我们可以不用关注过多的底层细节，能够把想法快速转换为结果。它也很灵活，且比较容易学。 在新版得Tensor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keras实现手写数字识别">
+<meta property="og:url" content="https://hexo.chunyang.eu.org/2022/02/11/keras%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TensorFlow和Kears的安装 Keras是基于TensorFlow和Theano（由加拿大蒙特利尔大学开发的机器学习框架）的深度学习库，是由纯python编写而成的高层神经网络API，也仅支持python开发。它是为了支持快速实践而对tensorflow或者Theano的再次封装，让我们可以不用关注过多的底层细节，能够把想法快速转换为结果。它也很灵活，且比较容易学。 在新版得Tensor">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2022-02-11T04:02:07.000Z">
+<meta property="article:modified_time" content="2022-02-11T07:38:38.519Z">
+<meta property="article:author" content="忘生啊">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="Keras">
+<meta property="article:tag" content="TensorFlow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hexo.chunyang.eu.org/2022/02/11/keras%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'keras实现手写数字识别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-11 15:38:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">keras实现手写数字识别</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-11T04:02:07.000Z" title="发表于 2022-02-11 12:02:07">2022-02-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-11T07:38:38.519Z" title="更新于 2022-02-11 15:38:38">2022-02-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="keras实现手写数字识别"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="TensorFlow和Kears的安装">TensorFlow和Kears的安装</h4>
+<p>Keras是基于TensorFlow和Theano（由加拿大蒙特利尔大学开发的机器学习框架）的深度学习库，是由纯python编写而成的高层神经网络API，也仅支持python开发。它是为了支持快速实践而对tensorflow或者Theano的再次封装，让我们可以不用关注过多的底层细节，能够把想法快速转换为结果。它也很灵活，且比较容易学。<br>
+在新版得TensorFlow中已经包含了Keras，所以我们只用安装TresorFlow即可。<br>
+TensorFlow安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在终端或powershell中输入</span></span><br><span class="line">pip install tensorflow <span class="comment">#默认安装CPU和GPU版本</span></span><br></pre></td></tr></table></figure>
+<p>如果不是英伟达的GPU，由于不支持CUDA，安装GPU版本在调用时会报如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Could not load dynamic library <span class="string">&#x27;libcudart.so.10.1&#x27;</span>; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory</span><br><span class="line">2020-09-20 21:31:45.455738: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror <span class="keyword">if</span> you <span class="keyword">do</span> not have a GPU <span class="built_in">set</span> up on your machine.</span><br></pre></td></tr></table></figure>
+<p>所以这时我们只安装CPU版本即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-cpu<span class="comment">#只安装CPU版本</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用Keras实现神经网络">使用Keras实现神经网络</h4>
+<h5 id="导包">导包</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.python.keras.utils.np_utils <span class="keyword">import</span> to_categorical</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models, layers, regularizers</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.optimizers <span class="keyword">import</span> RMSprop</span><br><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist<span class="comment">#导入数据集</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+<h5 id="数据导入">数据导入</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(train_imgs,train_labels),(test_images,test_labels)=mnist.load_data()<span class="comment">#加载数据集</span></span><br><span class="line"><span class="built_in">print</span>(train_imgs.shape,test_images.shape)<span class="comment">#打印训练集样本数据特征</span></span><br><span class="line"><span class="comment"># print(train_imgs[0])#28*28</span></span><br><span class="line"><span class="comment"># print(train_labels[0])</span></span><br><span class="line">plt.imshow(train_imgs[<span class="number">0</span>])<span class="comment">#打印图片 28*28像素图片</span></span><br><span class="line">plt.show()</span><br><span class="line">train_labels[:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>(60000, 28, 28) (10000, 28, 28)
+</code></pre>
+<p><img src="/img/Minst.png" alt="png"></p>
+<pre><code>array([5, 0], dtype=uint8)
+</code></pre>
+<h5 id="数据处理">数据处理</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">train_imgs=train_imgs.reshape((<span class="number">60000</span>,<span class="number">28</span>*<span class="number">28</span>)).astype(<span class="string">&#x27;float&#x27;</span>)<span class="comment">#将60000*28*28 拍成一维向量 即（60000，28*28）</span></span><br><span class="line">test_images=test_images.reshape((<span class="number">10000</span>,<span class="number">28</span>*<span class="number">28</span>)).astype(<span class="string">&#x27;float&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(train_imgs.shape)</span><br><span class="line">test_images.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(60000, 784)
+
+
+
+
+
+(10000, 784)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(train_labels[:<span class="number">2</span>])<span class="comment">#对标签进行处理</span></span><br><span class="line">train_labels=to_categorical(train_labels)<span class="comment">#onehot编码</span></span><br><span class="line">test_labels=to_categorical(test_labels)</span><br><span class="line"><span class="built_in">print</span>(train_labels.shape)</span><br><span class="line">train_labels[:<span class="number">2</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>[5 0]
+(60000, 10)
+
+
+
+
+
+array([[0., 0., 0., 0., 0., 1., 0., 0., 0., 0.],
+       [1., 0., 0., 0., 0., 0., 0., 0., 0., 0.]], dtype=float32)
+</code></pre>
+<h5 id="建立模型">建立模型</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">network=models.Sequential()<span class="comment">#模型</span></span><br><span class="line"><span class="comment">#隐藏层</span></span><br><span class="line"><span class="comment">#Dense是全连接得</span></span><br><span class="line"><span class="comment">#activation激活函数</span></span><br><span class="line"><span class="comment">#input_shape是输入层大小</span></span><br><span class="line">network.add(layers.Dense(units=<span class="number">15</span>,activation=<span class="string">&#x27;sigmoid&#x27;</span>,input_shape=(<span class="number">28</span>*<span class="number">28</span>,),))</span><br><span class="line"><span class="comment">#使用add来堆叠模型</span></span><br><span class="line">network.add(layers.Dense(units=<span class="number">10</span>,activation=<span class="string">&#x27;sigmoid&#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>2022-02-10 22:37:39.194764: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</code></pre>
+<h5 id="编译训练模型">编译训练模型</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#编译步骤</span></span><br><span class="line">network.<span class="built_in">compile</span>(optimizer=RMSprop(lr=<span class="number">0.001</span>),loss=<span class="string">&#x27;categorical_crossentropy&#x27;</span>,metrics=[<span class="string">&#x27;accuracy&#x27;</span>])</span><br><span class="line"><span class="comment">#训练网络</span></span><br><span class="line"><span class="comment">#epochs表示训练多少个回合，batch——size表示每次训练给多大得数据</span></span><br><span class="line">network.fit(train_imgs,train_labels,epochs=<span class="number">20</span>,batch_size=<span class="number">128</span>,verbose=<span class="number">2</span>)</span><br><span class="line"><span class="comment">#训练了大约100轮，在训练集上得正确率达到了0.9187</span></span><br></pre></td></tr></table></figure>
+<pre><code>Epoch 1/20
+469/469 - 2s - loss: 0.2825 - accuracy: 0.9192 - 2s/epoch - 5ms/step
+Epoch 2/20
+469/469 - 1s - loss: 0.2843 - accuracy: 0.9190 - 1s/epoch - 3ms/step
+Epoch 3/20
+469/469 - 1s - loss: 0.2847 - accuracy: 0.9186 - 1s/epoch - 3ms/step
+Epoch 4/20
+469/469 - 1s - loss: 0.2842 - accuracy: 0.9184 - 1s/epoch - 3ms/step
+Epoch 5/20
+469/469 - 1s - loss: 0.2818 - accuracy: 0.9176 - 1s/epoch - 3ms/step
+Epoch 6/20
+469/469 - 1s - loss: 0.2800 - accuracy: 0.9183 - 1s/epoch - 3ms/step
+Epoch 7/20
+469/469 - 1s - loss: 0.2809 - accuracy: 0.9196 - 1s/epoch - 3ms/step
+Epoch 8/20
+469/469 - 1s - loss: 0.2789 - accuracy: 0.9197 - 1s/epoch - 3ms/step
+Epoch 9/20
+469/469 - 1s - loss: 0.2767 - accuracy: 0.9198 - 1s/epoch - 3ms/step
+Epoch 10/20
+469/469 - 1s - loss: 0.2780 - accuracy: 0.9194 - 1s/epoch - 3ms/step
+Epoch 11/20
+469/469 - 1s - loss: 0.2776 - accuracy: 0.9193 - 1s/epoch - 3ms/step
+Epoch 12/20
+469/469 - 1s - loss: 0.2786 - accuracy: 0.9185 - 1s/epoch - 3ms/step
+Epoch 13/20
+469/469 - 1s - loss: 0.2789 - accuracy: 0.9179 - 1s/epoch - 3ms/step
+Epoch 14/20
+469/469 - 1s - loss: 0.2786 - accuracy: 0.9185 - 1s/epoch - 3ms/step
+Epoch 15/20
+469/469 - 1s - loss: 0.2794 - accuracy: 0.9198 - 1s/epoch - 3ms/step
+Epoch 16/20
+469/469 - 2s - loss: 0.2799 - accuracy: 0.9186 - 2s/epoch - 3ms/step
+Epoch 17/20
+469/469 - 1s - loss: 0.2793 - accuracy: 0.9185 - 1s/epoch - 3ms/step
+Epoch 18/20
+469/469 - 1s - loss: 0.2812 - accuracy: 0.9187 - 1s/epoch - 3ms/step
+Epoch 19/20
+469/469 - 1s - loss: 0.2824 - accuracy: 0.9185 - 1s/epoch - 3ms/step
+Epoch 20/20
+469/469 - 1s - loss: 0.2796 - accuracy: 0.9187 - 1s/epoch - 3ms/step
+
+
+
+
+
+&lt;keras.callbacks.History at 0x7f1add8ffc40&gt;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#神将网络总统结构</span></span><br><span class="line"><span class="built_in">print</span>(network.summary())</span><br><span class="line"><span class="comment">#11775=28*28*15+15</span></span><br><span class="line"><span class="comment"># 160=15*10+10</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="预测与评估">预测与评估</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在测试集上测试一下模型性能</span></span><br><span class="line">y_pre=network.predict(test_images[:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(y_pre,test_labels[:<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#评估模型</span></span><br><span class="line">test_loss,test_accuracy=network.evaluate(test_images,test_labels)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;test_loss:&#x27;</span>,test_loss,<span class="string">&#x27;      test_accuracy:&#x27;</span>,test_accuracy)</span><br></pre></td></tr></table></figure>
+<pre><code>[[3.7899613e-04 7.9274920e-05 6.9625974e-03 3.8788289e-02 5.3796172e-04
+  2.1356046e-03 2.5246632e-07 9.4646072e-01 1.8450618e-04 2.1742195e-02]
+ [4.7492981e-04 2.2884309e-03 1.4204246e-01 1.8988550e-03 5.1716688e-07
+  4.8227012e-03 6.3610077e-04 9.9899953e-06 3.8048625e-03 3.6833579e-05]
+ [5.9188955e-07 9.7502083e-01 1.5270770e-02 4.0745676e-02 4.2839492e-05
+  1.5333742e-02 2.3275614e-04 2.7633309e-02 1.5907192e-01 1.4984608e-03]
+ [9.5915210e-01 1.6660117e-05 5.6179762e-03 9.1245770e-04 9.8120026e-06
+  3.5943031e-02 1.2471378e-03 7.6335669e-04 4.9379766e-03 2.2325516e-03]
+ [6.8008900e-04 6.2575936e-04 9.1023445e-02 8.5565448e-03 9.9243879e-01
+  1.0120630e-02 3.1238824e-02 5.0986111e-02 9.3790025e-02 4.2072201e-01]] [[0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+ [0. 0. 1. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]]
+313/313 [==============================] - 1s 2ms/step - loss: 0.2939 - accuracy: 0.9143
+test_loss: 0.2938748896121979       test_accuracy: 0.9143000245094299
+</code></pre>
+<h5 id="添加正则化">添加正则化</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">network.add(layers.Dense(units=128,activation=<span class="string">&#x27;relu&#x27;</span>,input_shape=(28*28,),</span><br><span class="line">                        kernel_regularizer=regularizers.l2(0.1)))</span><br><span class="line">network.add(layers.Dense(units=30,activation=<span class="string">&#x27;relu&#x27;</span>,kernel_regularizer=regularizers.L2(0.1)))</span><br><span class="line">network.add(layers.Dense(units=10,activation=<span class="string">&#x27;softmax&#x27;</span>))</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">忘生啊</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hexo.chunyang.eu.org/2022/02/11/keras%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/">https://hexo.chunyang.eu.org/2022/02/11/keras%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hexo.chunyang.eu.org" target="_blank">Hexo</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/Keras/">Keras</a><a class="post-meta__tags" href="/tags/TensorFlow/">TensorFlow</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/02/11/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BP神经网络</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/02/11/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="BP神经网络"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-11</div><div class="title">BP神经网络</div></div></a></div><div><a href="/2022/01/28/K%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95-kNN/" title="K近邻算法(kNN)"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-28</div><div class="title">K近邻算法(kNN)</div></div></a></div><div><a href="/2022/01/29/%E5%86%B3%E7%AD%96%E6%A0%91/" title="决策树"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-29</div><div class="title">决策树</div></div></a></div><div><a href="/2022/01/30/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" title="推荐系统"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-30</div><div class="title">推荐系统</div></div></a></div><div><a href="/2022/01/29/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/" title="矩阵分解"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-29</div><div class="title">矩阵分解</div></div></a></div><div><a href="/2022/01/29/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" title="线性回归"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-29</div><div class="title">线性回归</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">忘生啊</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liwangshengya"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/liwangshengya" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:yxliwangsheng@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/wangshengya" target="_blank" title="telegram"><i class="fab fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#TensorFlow%E5%92%8CKears%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">TensorFlow和Kears的安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Keras%E5%AE%9E%E7%8E%B0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">2.</span> <span class="toc-text">使用Keras实现神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%BC%E5%8C%85"><span class="toc-number">2.1.</span> <span class="toc-text">导包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5"><span class="toc-number">2.2.</span> <span class="toc-text">数据导入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">数据处理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.4.</span> <span class="toc-text">建立模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.5.</span> <span class="toc-text">编译训练模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B%E4%B8%8E%E8%AF%84%E4%BC%B0"><span class="toc-number">2.6.</span> <span class="toc-text">预测与评估</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">2.7.</span> <span class="toc-text">添加正则化</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/11/keras%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" title="keras实现手写数字识别"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="keras实现手写数字识别"/></a><div class="content"><a class="title" href="/2022/02/11/keras%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" title="keras实现手写数字识别">keras实现手写数字识别</a><time datetime="2022-02-11T04:02:07.000Z" title="发表于 2022-02-11 12:02:07">2022-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/11/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="BP神经网络"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BP神经网络"/></a><div class="content"><a class="title" href="/2022/02/11/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="BP神经网络">BP神经网络</a><time datetime="2022-02-11T03:57:49.000Z" title="发表于 2022-02-11 11:57:49">2022-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/05/pandas/" title="pandas(大水文)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pandas(大水文)"/></a><div class="content"><a class="title" href="/2022/02/05/pandas/" title="pandas(大水文)">pandas(大水文)</a><time datetime="2022-02-05T09:01:25.000Z" title="发表于 2022-02-05 17:01:25">2022-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/04/numpy%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/" title="numpy基础用法"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="numpy基础用法"/></a><div class="content"><a class="title" href="/2022/02/04/numpy%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/" title="numpy基础用法">numpy基础用法</a><time datetime="2022-02-04T02:45:05.000Z" title="发表于 2022-02-04 10:45:05">2022-02-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/03/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" title="git基本操作"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git基本操作"/></a><div class="content"><a class="title" href="/2022/02/03/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" title="git基本操作">git基本操作</a><time datetime="2022-02-03T09:08:57.000Z" title="发表于 2022-02-03 17:08:57">2022-02-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 忘生啊</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome😍</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
