@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>宝塔面板降级去除强制登录</title>
+      <link href="/2022/03/20/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E9%99%8D%E7%BA%A7%E5%8E%BB%E9%99%A4%E5%BC%BA%E5%88%B6%E7%99%BB%E5%BD%95/"/>
+      <url>/2022/03/20/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E9%99%8D%E7%BA%A7%E5%8E%BB%E9%99%A4%E5%BC%BA%E5%88%B6%E7%99%BB%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<p>宝塔面板对于Linux小白来说是非常友好的，不需要知道很多命令就可以完成建站等多种操作。但是安装宝塔面板后会强制登陆，这是非常恶心人的，从7.8版本之后，之前的去除强制登录的办法都失效了，想要去除强制登陆就只能降级为7.7版本。</p><h4 id="1-安装宝塔面板">1.安装宝塔面板</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Centos安装脚本</span></span><br><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/</span><br><span class="line">install/install_6.0.sh &amp;&amp; sh install.sh</span><br><span class="line"><span class="comment">#Ubuntu/Deepin安装脚本</span></span><br><span class="line">wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; sudo bash install.sh</span><br><span class="line"><span class="comment">#Debian安装脚本</span></span><br><span class="line">wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; bash install.sh</span><br><span class="line"><span class="comment">#Fedora安装脚本</span></span><br><span class="line">wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure><h4 id="2-降级到7-7">2.降级到7.7</h4><h5 id="1-下载离线升级包">1.下载离线升级包</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.bt.cn/install/update/LinuxPanel-7.7.0.zip</span><br></pre></td></tr></table></figure><h5 id="2-解压">2.解压</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip LinuxPanel-7.7.0.zip</span><br></pre></td></tr></table></figure><h5 id="3-进入升级目录">3.进入升级目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/panel/</span><br></pre></td></tr></table></figure><h5 id="4-运行更新脚本降级">4.运行更新脚本降级</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash update.sh</span><br></pre></td></tr></table></figure><h4 id="3-去除强制登录">3.去除强制登录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf  /www/server/panel/data/bind.pl</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 宝塔面板 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>centos8迁移rocky linux</title>
       <link href="/2022/03/20/centos8%E8%BF%81%E7%A7%BBrocky-linux/"/>
       <url>/2022/03/20/centos8%E8%BF%81%E7%A7%BBrocky-linux/</url>
@@ -13,7 +40,7 @@
       
       <categories>
           
-          <category> linux </category>
+          <category> Linux </category>
           
       </categories>
       
