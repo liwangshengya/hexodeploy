@@ -1,0 +1,105 @@
+---
+title: powershell
+date: 2022-02-12 21:03:59
+tags:
+---
+powershell命令都是 动词+‘-’+名词的形式
+
+
+
+
+
+
+#### RNN循环神经网络
+##### 网络结构
+![](/img/循环神经网络/markdown-img-paste-20220219215447599.png)
+一个典型的循环神经网络结构如上图所示.我们可以发现RNN的隐藏层与传统神经网络之间有所不同。我们将其隐藏层展开，RNN将每个时间状态关联了起来，当前状态不仅受当前输入的影响，也受上一时刻的状态的影响。
+![](/img/循环神经网络/markdown-img-paste-20220219215646477.png)
+下面我们来看一下RNN是怎样运算的。下图是其中一个隐藏层单元。其中$a^{t}$是当前状态，$x^{t}$是当前输入。
+![](/img/循环神经网络/markdown-img-paste-20220219215955709.png)
+当前状态为$a^{(t)}=tanh(w_{ax}x^{(t)}+w_{aa}a^{(t-1)}+b_{a})$
+当前输出为$y^{(t)}=softmax(w_{ya}a^{(t)}+b_{y})$，这里的激活函数可根据任务目标进行替换。
+这里也很好理解，可以用人脑来比喻，加入一对情侣在上一时刻吵架了，在这一时刻女方闺蜜又来火上浇油，这时女方可能会在闺蜜的影响下更加生气，即当前状态还受到上一状态影响。
+RNN循环神经网络的特点为:隐藏层为串联结构，体现出“前因后果”，后面结果的生成要参考前面的信息。并且与卷积神经网络一样，所有特征共享一套参数，面对不同的输入，能够学到不同的相应结果，由于参数共享极大减少了训练参数量，输入和输出数据在不同例子中可以右不同的特征。
+##### 前向传播
+&emsp;在前面的单个隐藏层神经元计算中已经说了，这里不在啰嗦了。
+![](/img/循环神经网络/markdown-img-paste-20220219215955709.png)
+
+##### 损失函数
+由于RNN在每个时刻都有输入和输出，其单个时间步的损失函数可以自定义，对于二分类任务我们可以使用交叉熵作为我们的损失函数,$L^{t}(\hat{y^{t}},y^{t})=-y^{t}log(y^{t})-(1-y^{t})log(1-\hat{y^{t}})$
+.整个时间序列的损失函数就是将每个时间步的损失加起来$L(\hat{y^{t}},y^{t})=\sum_{t=1}^{T}L^{t}(\hat{y^{t}},y^{t})$
+##### 反向传播
+有了损失函数，我们就可以运用反向传播来最小化代价函数。
+![](/img/循环神经网络/markdown-img-paste-20220219223305889.png)
+##### RNN的缺点
+![](/img/循环神经网络/markdown-img-paste-20220219223526349.png)
+假设我们的RNN模型如图所示。则我们可以计算出
+$s_{1}=tanh(w_{x}x_{1}+w_{s}s_{0}+b_{1})$   &emsp;$o_{1}=w_{o}s_{1}+b_{2}$
+$s_{2}=tanh(w_{x}x_{2}+w_{s}s_{1}+b_{1})$   &emsp;$o_{1}=w_{o}s_{2}+b_{2}$
+$s_{1}=tanh(w_{x}x_{3}+w_{s}s_{3}+b_{1})$   &emsp;$o_{1}=w_{0}s_{3}+b_{2}$
+我们使用平方差作为损失函数，则在t=3时刻，损失函数为$L_{3}=\frac{1}{2}(Y_{3}-O_{3})^{2}$,在进行反向传播要求的梯度参数$w_{o},w_{x},w_{s},b$
+
+$$\frac{\partial{L_{3}}}{\partial{w_{o}}}=\frac{\partial{L_{3}}}{\partial{o_{3}}}\frac{\partial{o_{3}}}{\partial{w_{o}}}=(o_{3}-y_{3})\frac{\partial{o_{3}}}{\partial{w_{o}}}$$
+
+$$\frac{\partial{L_{3}}}{\partial_{w_{x}}}=\frac{\partial{L_{3}}}{\partial{o_{3}}}\frac{\partial{o_{3}}}{\partial{w_{x}}}=\frac{\partial{L_{3}}}{\partial{o_{3}}}\frac{\partial{o_{3}}}{\partial{s_{3}}}\frac{\partial{s_{3}}}{\partial{w_{x}}}$$
+
+令$\theta_{3}=w_{x}x_{3}+w_{2}s_{2}+b_{1}$
+$$\frac{s_{3}}{w_{x}}=\frac{\partial{tanh(\theta_{3})}}{\partial{\theta_{3}}}\frac{\partial{\theta_{3}}}{\partial{w_{x}}}=\frac{\partial{tanh(\theta_{3})}}{\partial{\theta_{3}}}(\frac{\partial{w_{x}x_{3}}}{\partial{w_{x}}}+\frac{\partial{w_{s}s_{2}}}{\partial{w_{x}}})=\frac{\partial{tanh(\theta_{3})}}{\partial{\theta_{3}}}x_{3}+\frac{\partial{tanh(\theta_{3})}}{\partial{\theta_{3}}}\frac{\partial{s_{2}}}{\partial{w_{x}}}w_{s}$$
+
+同理可得:
+$$\frac{\partial{s_{2}}}{\partial{w_{x}}}=\frac{\partial{tanh(\theta_{2})}}{\partial{\theta_{2}}}x_{2}+\frac{\partial{tanh(\theta_{2})}}{\partial{\theta_{2}}}\frac{\partial{s_{1}}}{\partial{w_{x}}}w_{s}$$
+$$\frac{\partial{s_{1}}}{\partial{w_{x}}}=\frac{\partial{tanh(\theta_{1})}}{\partial{\theta_{1}}}x_{1}$$
+
+所以:
+$$\frac{s_{3}}{w_{x}}=\frac{\partial{tanh(\theta_{3})}}{\partial{\theta_{3}}}x_{3}+\frac{\partial{tanh(\theta_{3})}}{\partial\theta_{3}}\frac{\partial{tanh(\theta_{2})}}{\partial\theta_{2}}x_{2}w_{x}+\frac{\partial{tanh(\theta_{3})}}{\theta_{3}}\frac{\partial{tanh(\theta_{2})}}{\partial\theta_{2}}\frac{\partial{tanh(\theta_{1})}}{\partial\theta_{1}}x_{1}w_{x}^{2}$$
+
+再次代入得
+$$\frac{\partial{L_{3}}}{\partial_{w_{x}}}=\frac{\partial{L_{3}}}{\partial{o_{3}}}\frac{\partial{o_{3}}}{\partial{s_{3}}}\frac{\partial{s_{3}}}{\partial{w_{x}}}=\frac{\partial{L_{3}}}{\partial{o_{3}}}\frac{\partial{o_{3}}}{\partial{s_{3}}}(\frac{\partial{tanh(\theta_{3})}}{\partial{\theta_{3}}}x_{3}+\frac{\partial{tanh(\theta_{3})}}{\partial\theta_{3}}\frac{\partial{tanh(\theta_{2})}}{\partial\theta_{2}}x_{2}w_{x}+\frac{\partial{tanh(\theta_{3})}}{\partial\theta_{3}}\frac{\partial{tanh(\theta_{2})}}{\partial\theta_{2}}\frac{\partial{tanh(\theta_{1})}}{\partial\theta_{1}}x_{1}w_{x}^{2})$$
+整理得：
+$$\frac{\partial{L_{3}}}{\partial_{w_{x}}}=\sum_{k=1}^{3}{\frac{\partial{L_{3}}}{\partial{o_{3}}}\frac{\partial{o_{3}}}{\partial{s_{3}}}(\prod_{j=4-k}^{3}\frac{\partial{tanh(\theta_{j})}}{\partial{\theta_{j}}}})x_{4-k}w_{s}^{k-1}$$
+则任意时刻得损失为
+$$\frac{\partial{L_{t}}}{\partial_{w_{x}}}=\sum_{k=1}^{t}{\frac{\partial{L_{t}}}{\partial{o_{t}}}\frac{\partial{o_{t}}}{\partial{s_{t}}}(\prod_{j=t+1-k}^{t}\frac{\partial{tanh(\theta_{j})}}{\partial{\theta_{j}}}})x_{t+1-k}w_{s}^{k-1}$$
+$w_{s}与w_{x}$得求法一样这里不在求了。
+我们可以看到$w_{s}$是k-1次方向，当$w_{s}$很小时，其在经过次方计算后就会逐渐变为0，从而导致梯度消失。
+![](/img/循环神经网络/markdown-img-paste-20220219230756194.png)
+&emsp;当t=20时的时，当$w_{s}$比较小时，在次方较高时就会变成了0，那么之前时刻对当前状态的影响就传不到这里来了。
+这里举个例子：有一句话为The cat,which ate already,...,wsa full.这里后面用was还是were是由前面的cat的单复数形式决定的，一旦中间的这个which句子很长，cat的信息根本传不到was这里来，对was的更新学习就起不到任何作用。
+而当$w_{s}$即使稍微大于1时最终就会非常大，从而造成梯度爆炸，解决办法就是梯度修剪，即观察梯度向量，如果它大于某个阈值，就缩放梯度向量，保证它不会太大。
+#### LSTM(长短期记忆神经网络)
+由于在输入序列较长时RNN容易造成梯度消失，所以提出了LSTM得概念，其思路是设计一个记忆细胞，具备选择记忆得功能，可以选择记忆重要信息，过滤掉噪声信息，减轻记忆负担。
+![](/img/循环神经网络/markdown-img-paste-20220220160018196.png)
+我们可以看到LSTM比RNN要复杂了许多，其主要区别就是增加了记忆细胞。下面我们来详细介绍这个记忆细胞是怎样工作的。
+![](/img/循环神经网络/markdown-img-paste-20220220155339921.png)
+我们以一个单元来做介绍，其中$C_{t}$代表当前时刻得记忆状态，$h_{t}$表示当前时刻得状态。一个单元主要由三个门组成：遗忘门，输入门，输出门。
+##### 前向传播过程
+$f_{t}=\sigma(w_{xf}x_{t}+w_{hf}h_{t-1}+b_{f})$ $\sigma为激活函数$
+$c_{t}^{’}=tanh(w_{xc}x_{t}+w_{hc}h_{t-1}+b_{c})$
+$i_{t}=\sigma{(w_{xi}x_{t}+w_{hi}h_{t-1}+b_{i})}$
+$c_{t}=c_{t-1}·*f_{t}+c_{t}^{’}·*i_{t}$
+$o_{t}=\sigma{w_{xo}x_{t}+w_{h0}h_{t-1}+b_{o}}$
+$m_{t}=tanh(c_{t})$
+$h_{t}=o_{t}·*m_{t}$
+在LSTM的每个时间步里面，都有一个记忆细胞cell($c_{t}$部分)，这个东西给予了LSTM选择记忆功能，使得LSTM有能力自由选择每个时间步里面记忆的内容。
+长短期记忆网络的步骤为:
+* 决定从元细胞状态中扔掉那些信息。由叫做“遗忘门”的sigmoid层控制，遗忘门会输出0~1之间的数，1表示保留该信息，0表示丢弃该信息。
+* 通过输入们将所有有用的新信息加入到元细胞状态。首先，将前一状态的输入输入到sigmoid函数中率除掉不重要信息。另外，通过tanh函数得到一个-1~1之间的输出结果。这将产生一个新的候选值，后续将判断是否将其加入到元细胞中。
+* 将上一步中sigmoid函数和tanh函数的输出结果相乘，并加上第一步中的输出结果，从而实现保留的信息都是重要信息，此时更新状态即可忘掉那些不重要的信息
+* 最后，从当前状态中选择重要的信息作为元细胞状态的输出。首先，将前一隐状态和当前输入值通过sigmoid函数得到一个0~1之间的结果值，然后对第三步中输出结果计算tanh函数的输出值，并与得到的结果值相乘，作为当前元细胞隐状态的输出结果，同时也作为下一个隐状态的输入值。
+我们带入期末考试这样一个场景，假设我们上一时刻考的是高等数学，这一时刻我们要考线性代数。$h_{t-1}$,$x_{t}$相当于复习，$c_{t}$表示复习中产生的记忆，$h_{t}$表示考完线性代数后的状态，则$h_{t-1}$是考完高等数学后的状态，$c_{t-1}$表示复习高等数学时产生的相关记忆。
+在复习线性代数时，我们想尽可能的忘掉与线性代数无关的东西，通过遗忘门，我们可以以往掉泰勒公式，傅里叶级数等与考线性代数没有什么帮助的知识给遗忘掉，而把基本运行，求导，求微分这样有帮助的知识给保留下来。
+输入门中的$c_{t}^{’}$表示再复习中生成的新的记忆，但这些记忆也并不是全都有用，比如我们在复习的过程中看了一些相关的数学家的奇闻轶事形成了相关的记忆，但是这部分记忆对我们的考试没有什么作用，所以我们要通过输入门将这些无用的信息给过滤掉，值记住与考试相关的记忆。$c_{t}$是我们的当下记忆，显然应该是当前复习学得的记忆与记过遗忘门后保留的对我们考试有关的记忆
+相加和。
+输出门要做的就是将复习的到的记忆给转换成答题的过程，我们在思考一道题时需要我们运用复习来的知识进行答题，而我们复习到的东西也并不一定全部都会考到，所以要通过$o_{t}$将考试需要用到的知识提取出来。
+##### 反向传播
+推导过程较复杂，这里不写了。下面的截图均来自视频。
+![](/img/循环神经网络/1645349135725.png)
+[具体视频推导](https://www.bilibili.com/video/BV1qM4y1M7Nv?p=5&share_source=copy_web)
+![](/img/循环神经网络/1645350551991.png)
+![](/img/循环神经网络/1645350620432.png)
+![](/img/循环神经网络/1645350657962.png)
+![](/img/循环神经网络/1645351016917.png)
+$c_{3}$到$c_{2}$有4条路径，$c_{2}$到$c_{1}$也有4条路径，所以$y_{3}$到$w_{xf}$共有16+4+4=24条路径。
+![](/img/循环神经网络/1645351695945.png)
+![](/img/循环神经网络/1645350312307.png)
+模型可以通过学习，通过多个参数的学习以达到$\frac{c_{t}}{c_{t-1}}$来达到接近于1，从而令多项连乘近似等于$1*1*1...*1$的效果。
+![](/img/循环神经网络/1645351896391.png)
