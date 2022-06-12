@@ -1,0 +1,3155 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>pandas(大水文) | Hexo</title><meta name="keywords" content="水文,科学计算库"><meta name="author" content="李忘生"><meta name="copyright" content="李忘生"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="大水文罢了。😁😁😁😁😅 1import pandas as pd Series 操作 Series 创建 12t&#x3D;pd.Series([1,2,3,4,5])#Series是一维的数据，带标签的数组t#第一列为索引 第二列是我们的数据 0    1 1    2 2    3 3    4 4    5 dtype: int64  12t2&#x3D;pd.Series([1,2,3,4,5],i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas(大水文)">
+<meta property="og:url" content="https://hexo.chunyang.eu.org/2022/02/05/pandas/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="大水文罢了。😁😁😁😁😅 1import pandas as pd Series 操作 Series 创建 12t&#x3D;pd.Series([1,2,3,4,5])#Series是一维的数据，带标签的数组t#第一列为索引 第二列是我们的数据 0    1 1    2 2    3 3    4 4    5 dtype: int64  12t2&#x3D;pd.Series([1,2,3,4,5],i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2022-02-05T09:01:25.000Z">
+<meta property="article:modified_time" content="2022-06-12T02:37:23.789Z">
+<meta property="article:author" content="李忘生">
+<meta property="article:tag" content="水文">
+<meta property="article:tag" content="科学计算库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hexo.chunyang.eu.org/2022/02/05/pandas/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"GQI1E1W197","apiKey":"e87ab2563de562be49f9ae8786744569","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pandas(大水文)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-12 10:37:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">pandas(大水文)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-05T09:01:25.000Z" title="发表于 2022-02-05 17:01:25">2022-02-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-12T02:37:23.789Z" title="更新于 2022-06-12 10:37:23">2022-06-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/">科学计算库</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>34分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="pandas(大水文)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>大水文罢了。😁😁😁😁😅</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+<h3 id="Series-操作">Series 操作</h3>
+<h4 id="Series-创建">Series 创建</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=pd.Series([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])<span class="comment">#Series是一维的数据，带标签的数组</span></span><br><span class="line">t<span class="comment">#第一列为索引 第二列是我们的数据</span></span><br></pre></td></tr></table></figure>
+<pre><code>0    1
+1    2
+2    3
+3    4
+4    5
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t2=pd.Series([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>])</span><br><span class="line">t2<span class="comment">#index里面为索引</span></span><br></pre></td></tr></table></figure>
+<pre><code>a    1
+b    2
+c    3
+d    4
+e    5
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#通过字典来创建Series   </span></span><br><span class="line">temp_dict=&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wangsheng&quot;</span>,</span><br><span class="line">            <span class="string">&quot;age&quot;</span>:<span class="number">100</span>,</span><br><span class="line">            <span class="string">&quot;tel&quot;</span>:<span class="number">10086</span>&#125;</span><br><span class="line">t3=pd.Series(temp_dict)</span><br><span class="line">t3</span><br></pre></td></tr></table></figure>
+<pre><code>name    wangsheng
+age           100
+tel         10086
+dtype: object
+</code></pre>
+<h4 id="Series-切片和索引">Series 切片和索引</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3</span><br></pre></td></tr></table></figure>
+<pre><code>name    wangsheng
+age           100
+tel         10086
+dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3[<span class="string">&quot;age&quot;</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>100
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3[<span class="string">&#x27;tel&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>10086
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(t3[<span class="number">0</span>])</span><br><span class="line">t3[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>wangsheng
+
+
+
+
+
+10086
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3[:<span class="number">2</span>]<span class="comment">#连续</span></span><br></pre></td></tr></table></figure>
+<pre><code>name    wangsheng
+age           100
+dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3[[<span class="number">1</span>,<span class="number">2</span>]]<span class="comment">#不连续取值</span></span><br></pre></td></tr></table></figure>
+<pre><code>age      100
+tel    10086
+dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3[[<span class="string">&quot;age&quot;</span>,<span class="string">&#x27;tel&#x27;</span>]]</span><br></pre></td></tr></table></figure>
+<pre><code>age      100
+tel    10086
+dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t</span><br></pre></td></tr></table></figure>
+<pre><code>0    1
+1    2
+2    3
+3    4
+4    5
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t[t&gt;<span class="number">3</span>]<span class="comment">#找出t大于3的数据</span></span><br></pre></td></tr></table></figure>
+<pre><code>3    4
+4    5
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3.index<span class="comment">#获取索引</span></span><br></pre></td></tr></table></figure>
+<pre><code>Index(['name', 'age', 'tel'], dtype='object')
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t3.values<span class="comment">#获取数据</span></span><br></pre></td></tr></table></figure>
+<pre><code>array(['wangsheng', 100, 10086], dtype=object)
+</code></pre>
+<h4 id="读取外部数据">读取外部数据</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df=pd.read_csv(<span class="string">&quot;./dogNames2.csv&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(df.head())</span><br><span class="line">row=df[<span class="string">&quot;Row_Labels&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(row.shape)</span><br></pre></td></tr></table></figure>
+<pre><code>  Row_Labels  Count_AnimalName
+0          1                 1
+1          2                 2
+2      40804                 1
+3      90201                 1
+4      90203                 1
+(16220,)
+</code></pre>
+<h3 id="DataFrame">DataFrame</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">pd.DataFrame(np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>,-<span class="number">1</span>)))</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>DataFrame对象既有行索引，又有列索引<br>
+行索引，表明不同行，横向索引，叫index，0轴，axis=0</p>
+<p>列索引，表名不同列，纵向索引，叫columns，1轴，axis=1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>,-<span class="number">1</span>)),index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>],columns=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>1.DataFrame和Series有什么关系呢？<br>
+DataFrame每一行是一个Series</p>
+<p>2.Series能够传入字典，那么DataFrame能够传入字典作为数据么？那么mongodb的数据是不是也可以这样传入呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d1=&#123;<span class="string">&quot;name&quot;</span>:[<span class="string">&quot;xiaoming&quot;</span>,<span class="string">&quot;xiaogang&quot;</span>],</span><br><span class="line">    <span class="string">&quot;age&quot;</span>:[<span class="number">28</span>,<span class="number">19</span>],</span><br><span class="line">    <span class="string">&quot;tel&quot;</span>:[<span class="number">10086</span>,<span class="number">10010</span>]&#125;</span><br><span class="line">pd.DataFrame(d1)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>xiaoming</td>
+      <td>28</td>
+      <td>10086</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>xiaogang</td>
+      <td>19</td>
+      <td>10010</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d2=[&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;xiaoming&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">32</span>,<span class="string">&quot;tel&quot;</span>:<span class="number">10086</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;xiaogang&quot;</span>,<span class="string">&quot;tel&quot;</span>:<span class="number">78</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;ss&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">10</span>&#125;]</span><br><span class="line">a=pd.DataFrame(d2)<span class="comment">#DataFrame可以有缺失值</span></span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>xiaoming</td>
+      <td>32.0</td>
+      <td>10086.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>xiaogang</td>
+      <td>NaN</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ss</td>
+      <td>10.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="DataFrame属性">DataFrame属性</h4>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df.shape</td>
+<td>行数，列数</td>
+</tr>
+<tr>
+<td>df.dtypes</td>
+<td>列数据类型</td>
+</tr>
+<tr>
+<td>df.ndim</td>
+<td>数据维度</td>
+</tr>
+<tr>
+<td>df.index</td>
+<td>行索引</td>
+</tr>
+<tr>
+<td>df.columns</td>
+<td>列索引</td>
+</tr>
+<tr>
+<td>df.values</td>
+<td>对象值，是二维ndarray数组</td>
+</tr>
+</tbody>
+</table>
+<p>DataFrame整体情况查询</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df.head(3)</td>
+<td>显示头部几行，默认五行</td>
+</tr>
+<tr>
+<td>df.tail(2)</td>
+<td>显示尾部几行，默认5行</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://df.info">df.info</a>()</td>
+<td>相关信息概述：行数，列数，列索引，列非空值个数，列类型，行类型，内存占用</td>
+</tr>
+<tr>
+<td>df.describe()</td>
+<td>快速综合统计结果：计数，均值，标准差，最大值，四分位数，最小值</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df=pd.read_csv(<span class="string">&quot;./dogNames2.csv&quot;</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row_Labels</th>
+      <th>Count_AnimalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>40804</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>90201</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>90203</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.describe()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Count_AnimalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>16220.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.558631</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>31.862511</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1195.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 16220 entries, 0 to 16219
+Data columns (total 2 columns):
+ #   Column            Non-Null Count  Dtype 
+---  ------            --------------  ----- 
+ 0   Row_Labels        16217 non-null  object
+ 1   Count_AnimalName  16220 non-null  int64 
+dtypes: int64(1), object(1)
+memory usage: 253.6+ KB
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#DataFrame排序方法</span></span><br><span class="line">df=df.sort_values(by=<span class="string">&quot;Count_AnimalName&quot;</span>)<span class="comment">#默认从小到大排序</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row_Labels</th>
+      <th>Count_AnimalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9383</th>
+      <td>MERINO</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9384</th>
+      <td>MERISE</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9386</th>
+      <td>MERLEDEZ</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9389</th>
+      <td>MERLYN</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df=df.sort_values(by=<span class="string">&quot;Count_AnimalName&quot;</span>,ascending=<span class="literal">False</span>)<span class="comment">#从大到小排序</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row_Labels</th>
+      <th>Count_AnimalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1156</th>
+      <td>BELLA</td>
+      <td>1195</td>
+    </tr>
+    <tr>
+      <th>9140</th>
+      <td>MAX</td>
+      <td>1153</td>
+    </tr>
+    <tr>
+      <th>2660</th>
+      <td>CHARLIE</td>
+      <td>856</td>
+    </tr>
+    <tr>
+      <th>3251</th>
+      <td>COCO</td>
+      <td>852</td>
+    </tr>
+    <tr>
+      <th>12368</th>
+      <td>ROCKY</td>
+      <td>823</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="DataFrame取行或取列">DataFrame取行或取列</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[:<span class="number">10</span>]<span class="comment">#取前二十行</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row_Labels</th>
+      <th>Count_AnimalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1156</th>
+      <td>BELLA</td>
+      <td>1195</td>
+    </tr>
+    <tr>
+      <th>9140</th>
+      <td>MAX</td>
+      <td>1153</td>
+    </tr>
+    <tr>
+      <th>2660</th>
+      <td>CHARLIE</td>
+      <td>856</td>
+    </tr>
+    <tr>
+      <th>3251</th>
+      <td>COCO</td>
+      <td>852</td>
+    </tr>
+    <tr>
+      <th>12368</th>
+      <td>ROCKY</td>
+      <td>823</td>
+    </tr>
+    <tr>
+      <th>8417</th>
+      <td>LOLA</td>
+      <td>795</td>
+    </tr>
+    <tr>
+      <th>8552</th>
+      <td>LUCKY</td>
+      <td>723</td>
+    </tr>
+    <tr>
+      <th>8560</th>
+      <td>LUCY</td>
+      <td>710</td>
+    </tr>
+    <tr>
+      <th>2032</th>
+      <td>BUDDY</td>
+      <td>677</td>
+    </tr>
+    <tr>
+      <th>3641</th>
+      <td>DAISY</td>
+      <td>649</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;Count_AnimalName&quot;</span>][:<span class="number">10</span>]<span class="comment">#取前20行Count_AnimalNames列</span></span><br></pre></td></tr></table></figure>
+<pre><code>1156     1195
+9140     1153
+2660      856
+3251      852
+12368     823
+8417      795
+8552      723
+8560      710
+2032      677
+3641      649
+Name: Count_AnimalName, dtype: int64
+</code></pre>
+<p>pandas取行或取列注意点：<br>
+-方括号写数字，表示对行进行操作<br>
+- 方括号写字符串，表示对列进行操作</p>
+<h4 id="loc索引">loc索引</h4>
+<p>df.loc 通过标签索引行数据<br>
+df.iloc 通过位置获取行数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=pd.DataFrame(np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>,-<span class="number">1</span>)),index=[<span class="string">&quot;a&quot;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>],columns=[<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;X&#x27;</span>,<span class="string">&quot;Y&quot;</span>,<span class="string">&#x27;Z&#x27;</span>])</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>W</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.loc[<span class="string">&#x27;a&#x27;</span>]<span class="comment">#取a行</span></span><br></pre></td></tr></table></figure>
+<pre><code>W    0
+X    1
+Y    2
+Z    3
+Name: a, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.loc[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>]<span class="comment">#取a行z列</span></span><br></pre></td></tr></table></figure>
+<pre><code>3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.loc[[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>],[<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>]]<span class="comment">#取间隔的多行多列</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>W</th>
+      <th>Z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.loc[<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;W&#x27;</span>:<span class="string">&#x27;Y&#x27;</span>]<span class="comment">#可以看出，冒号在loc中是闭合的</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>W</th>
+      <th>X</th>
+      <th>Y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.iloc[<span class="number">0</span>]<span class="comment">#按位置取第一行</span></span><br></pre></td></tr></table></figure>
+<pre><code>W    0
+X    1
+Y    2
+Z    3
+Name: a, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.iloc[:,<span class="number">2</span>]<span class="comment">#去第二列</span></span><br></pre></td></tr></table></figure>
+<pre><code>a     2
+b     6
+c    10
+Name: Y, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.iloc[[<span class="number">0</span>,<span class="number">2</span>],[<span class="number">1</span>,<span class="number">2</span>]]</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>X</th>
+      <th>Y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.iloc[<span class="number">0</span>:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>W</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t.loc[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;Y&quot;</span>]=<span class="number">100</span></span><br><span class="line">t<span class="comment">#赋值改变数据</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>W</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="bool索引">bool索引</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[(df[<span class="string">&quot;Count_AnimalName&quot;</span>]&gt;<span class="number">800</span>)&amp;(df[<span class="string">&quot;Count_AnimalName&quot;</span>]&lt;<span class="number">1000</span>)]<span class="comment">#大于800小于100</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row_Labels</th>
+      <th>Count_AnimalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2660</th>
+      <td>CHARLIE</td>
+      <td>856</td>
+    </tr>
+    <tr>
+      <th>3251</th>
+      <td>COCO</td>
+      <td>852</td>
+    </tr>
+    <tr>
+      <th>12368</th>
+      <td>ROCKY</td>
+      <td>823</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#假如我们想找到所有的使用次数超过700并且名字的字符串的长度大于4的狗的名字</span></span><br><span class="line">df[(df[<span class="string">&quot;Row_Labels&quot;</span>].<span class="built_in">str</span>.<span class="built_in">len</span>()&gt;<span class="number">4</span>)&amp;(df[<span class="string">&quot;Count_AnimalName&quot;</span>]&gt;<span class="number">800</span>)]</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row_Labels</th>
+      <th>Count_AnimalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1156</th>
+      <td>BELLA</td>
+      <td>1195</td>
+    </tr>
+    <tr>
+      <th>2660</th>
+      <td>CHARLIE</td>
+      <td>856</td>
+    </tr>
+    <tr>
+      <th>12368</th>
+      <td>ROCKY</td>
+      <td>823</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202202051658740.png" alt=""></p>
+<h4 id="缺失数据处理">缺失数据处理</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>xiaoming</td>
+      <td>32.0</td>
+      <td>10086.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>xiaogang</td>
+      <td>NaN</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ss</td>
+      <td>10.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.isnull(a)<span class="comment">#判断是否为nan</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.notnull(a)<span class="comment">#判断是否不为nan</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>处理方式1：删除NaN所在的行列dropna (axis=0, how=‘any’, inplace=False)<br>
+处理方式2：填充数据，t.fillna(t.mean()),t.fiallna(t.median()),t.fillna(0)</p>
+<p>处理为0的数据：t[t==0]=np.nan<br>
+当然并不是每次为0的数据都需要处理<br>
+计算平均值等情况，nan是不参与计算的，但是0会</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#处理方式1</span></span><br><span class="line">a.dropna(axis=<span class="number">0</span>)<span class="comment">#默认情况下将有nan的行全删了</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>xiaoming</td>
+      <td>32.0</td>
+      <td>10086.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.dropna(axis=<span class="number">0</span>,how=<span class="string">&#x27;all&#x27;</span>)<span class="comment">#当一行全部为nan才会删除 为“any’只要有就删除</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>xiaoming</td>
+      <td>32.0</td>
+      <td>10086.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>xiaogang</td>
+      <td>NaN</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ss</td>
+      <td>10.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 方式2</span></span><br><span class="line">a.fillna(a.mean())</span><br></pre></td></tr></table></figure>
+<pre><code>: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with 'numeric_only=None') is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
+  a.fillna(a.mean())
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>xiaoming</td>
+      <td>32.0</td>
+      <td>10086.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>xiaogang</td>
+      <td>21.0</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ss</td>
+      <td>10.0</td>
+      <td>5082.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="string">&#x27;age&#x27;</span>]=a[<span class="string">&#x27;age&#x27;</span>].fillna(a[<span class="string">&quot;age&quot;</span>].mean())</span><br><span class="line">a<span class="comment">#将age列的nan替换为age列的平均值</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>tel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>xiaoming</td>
+      <td>32.0</td>
+      <td>10086.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>xiaogang</td>
+      <td>21.0</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ss</td>
+      <td>10.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h3 id="pandas-数据合并与分组聚合">pandas 数据合并与分组聚合</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df=pd.read_csv(<span class="string">&quot;./IMDB-Movie-Data.csv&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(df.head(<span class="number">1</span>))</span><br><span class="line">df.info()</span><br></pre></td></tr></table></figure>
+<pre><code>   Rank                    Title                    Genre  \
+0     1  Guardians of the Galaxy  Action,Adventure,Sci-Fi   
+
+                                         Description    Director  \
+0  A group of intergalactic criminals are forced ...  James Gunn   
+
+                                              Actors  Year  Runtime (Minutes)  \
+0  Chris Pratt, Vin Diesel, Bradley Cooper, Zoe S...  2014                121   
+
+   Rating   Votes  Revenue (Millions)  Metascore  
+0     8.1  757074              333.13       76.0  
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 12 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   Rank                1000 non-null   int64  
+ 1   Title               1000 non-null   object 
+ 2   Genre               1000 non-null   object 
+ 3   Description         1000 non-null   object 
+ 4   Director            1000 non-null   object 
+ 5   Actors              1000 non-null   object 
+ 6   Year                1000 non-null   int64  
+ 7   Runtime (Minutes)   1000 non-null   int64  
+ 8   Rating              1000 non-null   float64
+ 9   Votes               1000 non-null   int64  
+ 10  Revenue (Millions)  872 non-null    float64
+ 11  Metascore           936 non-null    float64
+dtypes: float64(3), int64(4), object(5)
+memory usage: 93.9+ KB
+</code></pre>
+<p>统计电影分类情况<br>
+思路：重新构造一个全为0的数组，列名为分类，如果某一条数据中分类出现过，就让0变为1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计分类的列表</span></span><br><span class="line">temp_list=df[<span class="string">&quot;Genre&quot;</span>].<span class="built_in">str</span>.split(<span class="string">&quot;,&quot;</span>).tolist()</span><br><span class="line"><span class="built_in">print</span>(temp_list[:<span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>[['Action', 'Adventure', 'Sci-Fi'], ['Adventure', 'Mystery', 'Sci-Fi'], ['Horror', 'Thriller'], ['Animation', 'Comedy', 'Family'], ['Action', 'Adventure', 'Fantasy']]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">genre_list=<span class="built_in">list</span>(<span class="built_in">set</span>([i <span class="keyword">for</span> j <span class="keyword">in</span> temp_list <span class="keyword">for</span> i <span class="keyword">in</span> j]))<span class="comment">#set为集合可以去重</span></span><br><span class="line"><span class="built_in">print</span>(genre_list)<span class="comment">#获得分类列表</span></span><br></pre></td></tr></table></figure>
+<pre><code>['Horror', 'Animation', 'Action', 'Thriller', 'History', 'Adventure', 'Family', 'Mystery', 'War', 'Sport', 'Fantasy', 'Sci-Fi', 'Comedy', 'Crime', 'Biography', 'Music', 'Romance', 'Musical', 'Western', 'Drama']
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#构造全为0的数组</span></span><br><span class="line">zero_df=pd.DataFrame(np.zeros((df.shape[<span class="number">0</span>],<span class="built_in">len</span>(genre_list))),columns=genre_list)</span><br><span class="line">zero_df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Horror</th>
+      <th>Animation</th>
+      <th>Action</th>
+      <th>Thriller</th>
+      <th>History</th>
+      <th>Adventure</th>
+      <th>Family</th>
+      <th>Mystery</th>
+      <th>War</th>
+      <th>Sport</th>
+      <th>Fantasy</th>
+      <th>Sci-Fi</th>
+      <th>Comedy</th>
+      <th>Crime</th>
+      <th>Biography</th>
+      <th>Music</th>
+      <th>Romance</th>
+      <th>Musical</th>
+      <th>Western</th>
+      <th>Drama</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#给出每个电影分类出现的位置赋值为1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(df.shape[<span class="number">0</span>]):</span><br><span class="line">    zero_df.loc[i,temp_list[i]]=<span class="number">1</span></span><br><span class="line">    <span class="comment">#zero_df.loc[i,[&#x27;Action&#x27;, &#x27;Adventure&#x27;, &#x27;Sci-Fi&#x27;]]</span></span><br><span class="line">zero_df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Horror</th>
+      <th>Animation</th>
+      <th>Action</th>
+      <th>Thriller</th>
+      <th>History</th>
+      <th>Adventure</th>
+      <th>Family</th>
+      <th>Mystery</th>
+      <th>War</th>
+      <th>Sport</th>
+      <th>Fantasy</th>
+      <th>Sci-Fi</th>
+      <th>Comedy</th>
+      <th>Crime</th>
+      <th>Biography</th>
+      <th>Music</th>
+      <th>Romance</th>
+      <th>Musical</th>
+      <th>Western</th>
+      <th>Drama</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计每个分类电影的和</span></span><br><span class="line">genre_count=zero_df.<span class="built_in">sum</span>(axis=<span class="number">0</span>)</span><br><span class="line">genre_count</span><br></pre></td></tr></table></figure>
+<pre><code>Horror       119.0
+Animation     49.0
+Action       303.0
+Thriller     195.0
+History       29.0
+Adventure    259.0
+Family        51.0
+Mystery      106.0
+War           13.0
+Sport         18.0
+Fantasy      101.0
+Sci-Fi       120.0
+Comedy       279.0
+Crime        150.0
+Biography     81.0
+Music         16.0
+Romance      141.0
+Musical        5.0
+Western        7.0
+Drama        513.0
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#排序</span></span><br><span class="line">genre_count.sort_values()</span><br></pre></td></tr></table></figure>
+<pre><code>Musical        5.0
+Western        7.0
+War           13.0
+Music         16.0
+Sport         18.0
+History       29.0
+Animation     49.0
+Family        51.0
+Biography     81.0
+Fantasy      101.0
+Mystery      106.0
+Horror       119.0
+Sci-Fi       120.0
+Romance      141.0
+Crime        150.0
+Thriller     195.0
+Adventure    259.0
+Comedy       279.0
+Action       303.0
+Drama        513.0
+dtype: float64
+</code></pre>
+<h4 id="数组合并之join">数组合并之join</h4>
+<p>默认情况下将行索引相同的数据合并到一起</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1=pd.DataFrame(np.ones((<span class="number">2</span>,<span class="number">4</span>)),index=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>],columns=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2=pd.DataFrame(np.zeros((<span class="number">3</span>,<span class="number">3</span>)),index=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],columns=[<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;z&#x27;</span>])</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.join(df2)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2=pd.DataFrame(np.zeros((<span class="number">3</span>,<span class="number">3</span>)),index=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],columns=[<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;z&#x27;</span>])</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.join(df2)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2.join(df1)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="数据合并之merge">数据合并之merge</h4>
+<p>merge:按照指定的列把数据按照一定的方式合并到一起</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df3=pd.DataFrame(np.zeros((<span class="number">3</span>,<span class="number">3</span>)),columns=[<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;x&#x27;</span>])</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>f</th>
+      <th>a</th>
+      <th>x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.merge(df3,on=<span class="string">&#x27;a&#x27;</span>)<span class="comment">#为空集，应为默认的合并方式为inner 交集</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>f</th>
+      <th>x</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df3.loc[<span class="number">1</span>,<span class="string">&#x27;a&#x27;</span>]=<span class="number">1</span></span><br><span class="line">df1.merge(df3,on=<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>f</th>
+      <th>x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df3=pd.DataFrame(np.arange(<span class="number">9</span>).reshape((<span class="number">3</span>,<span class="number">3</span>)),columns=[<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;x&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df3)</span><br><span class="line">df1.merge(df3,on=<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>   f  a  x
+0  0  1  2
+1  3  4  5
+2  6  7  8
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>f</th>
+      <th>x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">&#x27;key&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>, <span class="string">&#x27;K3&#x27;</span>],</span><br><span class="line">                                  <span class="string">&#x27;A&#x27;</span>: [<span class="string">&#x27;A0&#x27;</span>, <span class="string">&#x27;A1&#x27;</span>, <span class="string">&#x27;A2&#x27;</span>, <span class="string">&#x27;A3&#x27;</span>],</span><br><span class="line">                                  <span class="string">&#x27;B&#x27;</span>: [<span class="string">&#x27;B0&#x27;</span>, <span class="string">&#x27;B1&#x27;</span>, <span class="string">&#x27;B2&#x27;</span>, <span class="string">&#x27;B3&#x27;</span>]&#125;)</span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">&#x27;key&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>, <span class="string">&#x27;K3&#x27;</span>],</span><br><span class="line">                                    <span class="string">&#x27;C&#x27;</span>: [<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>],</span><br><span class="line">                                    <span class="string">&#x27;D&#x27;</span>: [<span class="string">&#x27;D0&#x27;</span>, <span class="string">&#x27;D1&#x27;</span>, <span class="string">&#x27;D2&#x27;</span>, <span class="string">&#x27;D3&#x27;</span>]&#125;)</span><br><span class="line">left</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>A0</td>
+      <td>B0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K1</td>
+      <td>A1</td>
+      <td>B1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>K2</td>
+      <td>A2</td>
+      <td>B2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K3</td>
+      <td>A3</td>
+      <td>B3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">right</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>C0</td>
+      <td>D0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K1</td>
+      <td>C1</td>
+      <td>D1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>K2</td>
+      <td>C2</td>
+      <td>D2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K3</td>
+      <td>C3</td>
+      <td>D3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">left.merge(right,on=<span class="string">&#x27;key&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>A0</td>
+      <td>B0</td>
+      <td>C0</td>
+      <td>D0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K1</td>
+      <td>A1</td>
+      <td>B1</td>
+      <td>C1</td>
+      <td>D1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>K2</td>
+      <td>A2</td>
+      <td>B2</td>
+      <td>C2</td>
+      <td>D2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K3</td>
+      <td>A3</td>
+      <td>B3</td>
+      <td>C3</td>
+      <td>D3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">&#x27;key1&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>],</span><br><span class="line">                             <span class="string">&#x27;key2&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>],</span><br><span class="line">                             <span class="string">&#x27;A&#x27;</span>: [<span class="string">&#x27;A0&#x27;</span>, <span class="string">&#x27;A1&#x27;</span>, <span class="string">&#x27;A2&#x27;</span>, <span class="string">&#x27;A3&#x27;</span>],</span><br><span class="line">                             <span class="string">&#x27;B&#x27;</span>: [<span class="string">&#x27;B0&#x27;</span>, <span class="string">&#x27;B1&#x27;</span>, <span class="string">&#x27;B2&#x27;</span>, <span class="string">&#x27;B3&#x27;</span>]&#125;)</span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">&#x27;key1&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>],</span><br><span class="line">                              <span class="string">&#x27;key2&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>],</span><br><span class="line">                              <span class="string">&#x27;C&#x27;</span>: [<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>],</span><br><span class="line">                              <span class="string">&#x27;D&#x27;</span>: [<span class="string">&#x27;D0&#x27;</span>, <span class="string">&#x27;D1&#x27;</span>, <span class="string">&#x27;D2&#x27;</span>, <span class="string">&#x27;D3&#x27;</span>]&#125;)</span><br><span class="line">left</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>K0</td>
+      <td>A0</td>
+      <td>B0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K0</td>
+      <td>K1</td>
+      <td>A1</td>
+      <td>B1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>K1</td>
+      <td>K0</td>
+      <td>A2</td>
+      <td>B2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K2</td>
+      <td>K1</td>
+      <td>A3</td>
+      <td>B3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">right</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>K0</td>
+      <td>C0</td>
+      <td>D0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K1</td>
+      <td>K0</td>
+      <td>C1</td>
+      <td>D1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>K1</td>
+      <td>K0</td>
+      <td>C2</td>
+      <td>D2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K2</td>
+      <td>K0</td>
+      <td>C3</td>
+      <td>D3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">left.merge(right,on=[<span class="string">&#x27;key1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>],how=<span class="string">&#x27;outer&#x27;</span>)</span><br><span class="line"><span class="comment">#how = [&#x27;left&#x27;, &#x27;right&#x27;, &#x27;outer&#x27;, &#x27;inner&#x27;]</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>K0</td>
+      <td>A0</td>
+      <td>B0</td>
+      <td>C0</td>
+      <td>D0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K0</td>
+      <td>K1</td>
+      <td>A1</td>
+      <td>B1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>K1</td>
+      <td>K0</td>
+      <td>A2</td>
+      <td>B2</td>
+      <td>C1</td>
+      <td>D1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K1</td>
+      <td>K0</td>
+      <td>A2</td>
+      <td>B2</td>
+      <td>C2</td>
+      <td>D2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>K2</td>
+      <td>K1</td>
+      <td>A3</td>
+      <td>B3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>K2</td>
+      <td>K0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>C3</td>
+      <td>D3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">left.merge(right,on=[<span class="string">&#x27;key1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>],how=<span class="string">&#x27;right&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>K0</td>
+      <td>A0</td>
+      <td>B0</td>
+      <td>C0</td>
+      <td>D0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K1</td>
+      <td>K0</td>
+      <td>A2</td>
+      <td>B2</td>
+      <td>C1</td>
+      <td>D1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>K1</td>
+      <td>K0</td>
+      <td>A2</td>
+      <td>B2</td>
+      <td>C2</td>
+      <td>D2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K2</td>
+      <td>K0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>C3</td>
+      <td>D3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># handle overlapping</span></span><br><span class="line">boys = pd.DataFrame(&#123;<span class="string">&#x27;k&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>], <span class="string">&#x27;age&#x27;</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]&#125;)</span><br><span class="line">girls = pd.DataFrame(&#123;<span class="string">&#x27;k&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K3&#x27;</span>], <span class="string">&#x27;age&#x27;</span>: [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]&#125;)</span><br><span class="line">res = pd.merge(boys, girls, on=<span class="string">&#x27;k&#x27;</span>, suffixes=[<span class="string">&#x27;_boy&#x27;</span>, <span class="string">&#x27;_girl&#x27;</span>], how=<span class="string">&#x27;inner&#x27;</span>)</span><br><span class="line">res</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>k</th>
+      <th>age_boy</th>
+      <th>age_girl</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K0</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K0</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="数据分组聚合">数据分组聚合</h4>
+<p>如果我想知道美国的星巴克数量和中国的哪个多，或者我想知道中国每个省份星巴克的数量的情况，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df=pd.read_csv(<span class="string">&#x27;.\starbucks_store_worldwide.csv&#x27;</span>)</span><br><span class="line">df.head(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Brand</th>
+      <th>Store Number</th>
+      <th>Store Name</th>
+      <th>Ownership Type</th>
+      <th>Street Address</th>
+      <th>City</th>
+      <th>State/Province</th>
+      <th>Country</th>
+      <th>Postcode</th>
+      <th>Phone Number</th>
+      <th>Timezone</th>
+      <th>Longitude</th>
+      <th>Latitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Starbucks</td>
+      <td>47370-257954</td>
+      <td>Meritxell, 96</td>
+      <td>Licensed</td>
+      <td>Av. Meritxell, 96</td>
+      <td>Andorra la Vella</td>
+      <td>7</td>
+      <td>AD</td>
+      <td>AD500</td>
+      <td>376818720</td>
+      <td>GMT+1:00 Europe/Andorra</td>
+      <td>1.53</td>
+      <td>42.51</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()<span class="comment">#phone number,postcode等有缺失</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 25600 entries, 0 to 25599
+Data columns (total 13 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   Brand           25600 non-null  object 
+ 1   Store Number    25600 non-null  object 
+ 2   Store Name      25600 non-null  object 
+ 3   Ownership Type  25600 non-null  object 
+ 4   Street Address  25598 non-null  object 
+ 5   City            25585 non-null  object 
+ 6   State/Province  25600 non-null  object 
+ 7   Country         25600 non-null  object 
+ 8   Postcode        24078 non-null  object 
+ 9   Phone Number    18739 non-null  object 
+ 10  Timezone        25600 non-null  object 
+ 11  Longitude       25599 non-null  float64
+ 12  Latitude        25599 non-null  float64
+dtypes: float64(2), object(11)
+memory usage: 2.5+ MB
+</code></pre>
+<p>在pandas中类似的分组的操作我们有很简单的方式来完成</p>
+<p>df.groupby(by=“columns_name”)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">grouped=df.groupby(by=<span class="string">&quot;Country&quot;</span>)</span><br><span class="line"><span class="built_in">type</span>(grouped)</span><br><span class="line"><span class="comment">#DataFrameGroupBy类型</span></span><br><span class="line">    <span class="comment">#可以进行遍历</span></span><br><span class="line"><span class="comment">#for i in grouped:</span></span><br><span class="line"> <span class="comment">#   print(i)#每个i是一个元组，第一个元素为国家，第二个是DataFrame</span></span><br><span class="line">    <span class="comment">#调用聚会方法</span></span><br><span class="line">grouped.count()[:<span class="number">2</span>]<span class="comment">#默认对所有列进行统计</span></span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Brand</th>
+      <th>Store Number</th>
+      <th>Store Name</th>
+      <th>Ownership Type</th>
+      <th>Street Address</th>
+      <th>City</th>
+      <th>State/Province</th>
+      <th>Postcode</th>
+      <th>Phone Number</th>
+      <th>Timezone</th>
+      <th>Longitude</th>
+      <th>Latitude</th>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AD</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>AE</th>
+      <td>144</td>
+      <td>144</td>
+      <td>144</td>
+      <td>144</td>
+      <td>144</td>
+      <td>144</td>
+      <td>144</td>
+      <td>24</td>
+      <td>78</td>
+      <td>144</td>
+      <td>144</td>
+      <td>144</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grouped[<span class="string">&quot;Country&quot;</span>].count()[:<span class="number">3</span>]<span class="comment">#只对Country列进行统计</span></span><br></pre></td></tr></table></figure>
+<pre><code>Country
+AD      1
+AE    144
+AR    108
+Name: Country, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">country_count=grouped[<span class="string">&quot;Brand&quot;</span>].count()</span><br><span class="line"><span class="built_in">print</span>(country_count[<span class="string">&quot;US&quot;</span>])</span><br><span class="line">country_count[<span class="string">&quot;CN&quot;</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>13608
+
+
+
+
+
+2734
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计中国每个省分国家店铺数量</span></span><br><span class="line">china_data=df[df[<span class="string">&quot;Country&quot;</span>]==<span class="string">&quot;CN&quot;</span>]</span><br><span class="line">grouped=china_data.groupby(by=<span class="string">&quot;State/Province&quot;</span>).count()[<span class="string">&quot;Brand&quot;</span>]</span><br><span class="line">grouped[:<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>State/Province
+11    236
+12     58
+13     24
+14      8
+Name: Brand, dtype: int64
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202202051700056.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据按照多个条件进行分组</span></span><br><span class="line">grouped = df[<span class="string">&quot;Brand&quot;</span>].groupby(by=[df[<span class="string">&quot;Country&quot;</span>],df[<span class="string">&quot;State/Province&quot;</span>]])</span><br><span class="line"><span class="built_in">print</span>(grouped)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x000001CA9031CF40&gt;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据按照多个条件进行分组后，任然返回DataFrame</span></span><br><span class="line">t1 = df[[<span class="string">&quot;Country&quot;</span>]].groupby(by=[df[<span class="string">&quot;Country&quot;</span>],df[<span class="string">&quot;State/Province&quot;</span>]]).count()</span><br><span class="line">t2 = df.groupby(by=[<span class="string">&quot;Country&quot;</span>,<span class="string">&quot;State/Province&quot;</span>])[[<span class="string">&quot;Country&quot;</span>]].count()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(t1),<span class="built_in">type</span>(t2))</span><br><span class="line">t1.head()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt; &lt;class 'pandas.core.frame.DataFrame'&gt;
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Country</th>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <th>State/Province</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AD</th>
+      <th>7</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">AE</th>
+      <th>AJ</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>AZ</th>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>DU</th>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>FU</th>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="pandas时间序列">pandas时间序列</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(start=<span class="string">&#x27;20220101&#x27;</span>,end=<span class="string">&#x27;20220227&#x27;</span>,freq=<span class="string">&#x27;D&#x27;</span>)<span class="comment">#按一天</span></span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex(['2022-01-01', '2022-01-02', '2022-01-03', '2022-01-04',
+               '2022-01-05', '2022-01-06', '2022-01-07', '2022-01-08',
+               '2022-01-09', '2022-01-10', '2022-01-11', '2022-01-12',
+               '2022-01-13', '2022-01-14', '2022-01-15', '2022-01-16',
+               '2022-01-17', '2022-01-18', '2022-01-19', '2022-01-20',
+               '2022-01-21', '2022-01-22', '2022-01-23', '2022-01-24',
+               '2022-01-25', '2022-01-26', '2022-01-27', '2022-01-28',
+               '2022-01-29', '2022-01-30', '2022-01-31', '2022-02-01',
+               '2022-02-02', '2022-02-03', '2022-02-04', '2022-02-05',
+               '2022-02-06', '2022-02-07', '2022-02-08', '2022-02-09',
+               '2022-02-10', '2022-02-11', '2022-02-12', '2022-02-13',
+               '2022-02-14', '2022-02-15', '2022-02-16', '2022-02-17',
+               '2022-02-18', '2022-02-19', '2022-02-20', '2022-02-21',
+               '2022-02-22', '2022-02-23', '2022-02-24', '2022-02-25',
+               '2022-02-26', '2022-02-27'],
+              dtype='datetime64[ns]', freq='D')
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202202051700963.png" alt=""></p>
+<p>我们可以使用pandas提供的方法把时间字符串转化为时间序列</p>
+<p>df[“timeStamp”] = pd.to_datetime(df[“timeStamp”],format=“”)</p>
+<p>format参数大部分情况下可以不用写，但是对于pandas无法格式化的时间字符串，我们可以使用该参数，比如包含中文</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(start=<span class="string">&#x27;20220101&#x27;</span>,end=<span class="string">&#x27;20220227&#x27;</span>,freq=<span class="string">&#x27;10D&#x27;</span>)<span class="comment">#按10天</span></span><br></pre></td></tr></table></figure>
+<pre><code>DatetimeIndex(['2022-01-01', '2022-01-11', '2022-01-21', '2022-01-31',
+               '2022-02-10', '2022-02-20'],
+              dtype='datetime64[ns]', freq='10D')
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://hexo.chunyang.eu.org">李忘生</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hexo.chunyang.eu.org/2022/02/05/pandas/">https://hexo.chunyang.eu.org/2022/02/05/pandas/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hexo.chunyang.eu.org" target="_blank">Hexo</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B0%B4%E6%96%87/">水文</a><a class="post-meta__tags" href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/">科学计算库</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/11/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BP神经网络</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/04/numpy%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">numpy基础用法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/02/04/numpy%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/" title="numpy基础用法"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-04</div><div class="title">numpy基础用法</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">李忘生</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liwangshengya"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/liwangshengya" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/yxliwangsheng@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/wangshengya" target="_blank" title="Telegrame"><i class="fa-brands fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Series-%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">Series 操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Series-%E5%88%9B%E5%BB%BA"><span class="toc-number">1.1.</span> <span class="toc-text">Series 创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Series-%E5%88%87%E7%89%87%E5%92%8C%E7%B4%A2%E5%BC%95"><span class="toc-number">1.2.</span> <span class="toc-text">Series 切片和索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.</span> <span class="toc-text">读取外部数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DataFrame"><span class="toc-number">2.</span> <span class="toc-text">DataFrame</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DataFrame%E5%B1%9E%E6%80%A7"><span class="toc-number">2.1.</span> <span class="toc-text">DataFrame属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DataFrame%E5%8F%96%E8%A1%8C%E6%88%96%E5%8F%96%E5%88%97"><span class="toc-number">2.2.</span> <span class="toc-text">DataFrame取行或取列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loc%E7%B4%A2%E5%BC%95"><span class="toc-number">2.3.</span> <span class="toc-text">loc索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bool%E7%B4%A2%E5%BC%95"><span class="toc-number">2.4.</span> <span class="toc-text">bool索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">缺失数据处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas-%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%E4%B8%8E%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="toc-number">3.</span> <span class="toc-text">pandas 数据合并与分组聚合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%90%88%E5%B9%B6%E4%B9%8Bjoin"><span class="toc-number">3.1.</span> <span class="toc-text">数组合并之join</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%E4%B9%8Bmerge"><span class="toc-number">3.2.</span> <span class="toc-text">数据合并之merge</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="toc-number">3.3.</span> <span class="toc-text">数据分组聚合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pandas%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97"><span class="toc-number">3.4.</span> <span class="toc-text">pandas时间序列</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/06/12/hello-world/" title="Hello World"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/06/12/hello-world/" title="Hello World">Hello World</a><time datetime="2022-06-12T02:37:23.788Z" title="发表于 2022-06-12 10:37:23">2022-06-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/11/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/" title="生成模型"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="生成模型"/></a><div class="content"><a class="title" href="/2022/04/11/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/" title="生成模型">生成模型</a><time datetime="2022-04-11T14:46:03.000Z" title="发表于 2022-04-11 22:46:03">2022-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/20/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E9%99%8D%E7%BA%A7%E5%8E%BB%E9%99%A4%E5%BC%BA%E5%88%B6%E7%99%BB%E5%BD%95/" title="宝塔面板降级去除强制登录"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="宝塔面板降级去除强制登录"/></a><div class="content"><a class="title" href="/2022/03/20/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E9%99%8D%E7%BA%A7%E5%8E%BB%E9%99%A4%E5%BC%BA%E5%88%B6%E7%99%BB%E5%BD%95/" title="宝塔面板降级去除强制登录">宝塔面板降级去除强制登录</a><time datetime="2022-03-20T12:35:16.000Z" title="发表于 2022-03-20 20:35:16">2022-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/20/centos8%E8%BF%81%E7%A7%BBrocky-linux/" title="centos8迁移rocky linux"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos8迁移rocky linux"/></a><div class="content"><a class="title" href="/2022/03/20/centos8%E8%BF%81%E7%A7%BBrocky-linux/" title="centos8迁移rocky linux">centos8迁移rocky linux</a><time datetime="2022-03-20T09:55:50.000Z" title="发表于 2022-03-20 17:55:50">2022-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/19/RNN%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="循环神经网络"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="循环神经网络"/></a><div class="content"><a class="title" href="/2022/02/19/RNN%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" title="循环神经网络">循环神经网络</a><time datetime="2022-02-19T13:31:33.000Z" title="发表于 2022-02-19 21:31:33">2022-02-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 李忘生</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome to my blog!😊</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
