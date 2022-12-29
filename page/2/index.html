@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>忘生的blog</title><meta name="author" content="李忘生"><meta name="copyright" content="李忘生"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="忘生的blog">
+<meta property="og:url" content="https://hexo.chunyang.eu.org/page/2/index.html">
+<meta property="og:site_name" content="忘生的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexo.chunyang.eu.org/img/liwangsheng.png">
+<meta property="article:author" content="李忘生">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexo.chunyang.eu.org/img/liwangsheng.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hexo.chunyang.eu.org/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"GQI1E1W197","apiKey":"e87ab2563de562be49f9ae8786744569","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '忘生的blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-12-29 14:30:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/liwangsheng.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202201281354528.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">忘生的blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">忘生的blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/liwangshengya" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/yxliwangsheng@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/wangshengya" target="_blank" title="Telegrame"><i class="fa-brands fa-telegram"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/p/199750bf.html" title="宝塔面板降级去除强制登录"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="宝塔面板降级去除强制登录"></a></div><div class="recent-post-info"><a class="article-title" href="/p/199750bf.html" title="宝塔面板降级去除强制登录">宝塔面板降级去除强制登录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-03-20T12:35:16.000Z" title="发表于 2022-03-20 20:35:16">2022-03-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">宝塔面板对于Linux小白来说是非常友好的，不需要知道很多命令就可以完成建站等多种操作。但是安装宝塔面板后会强制登陆，这是非常恶心人的，从7.8版本之后，之前的去除强制登录的办法都失效了，想要去除强制登陆就只能降级为7.7版本。
+1.安装宝塔面板
+123456789#Centos安装脚本yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh#Ubuntu/Deepin安装脚本wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; sudo bash install.sh#Debian安装脚本wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; bash install.sh#Fedora安装 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/5ee59ad7.html" title="centos8迁移rocky linux"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos8迁移rocky linux"></a></div><div class="recent-post-info"><a class="article-title" href="/p/5ee59ad7.html" title="centos8迁移rocky linux">centos8迁移rocky linux</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-03-20T09:55:50.000Z" title="发表于 2022-03-20 17:55:50">2022-03-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">centos8已经在2021年12月31号提前停止维护了。而Rocky Linux 是红帽宣布放弃 CentOS Linux 后，由 CentOS 联合创始人 Gregory Kurtzer 创建的 Linux 发行版，旨在继承 CentOS 的社区属性。
+由于阿里云在重装系统时暂时为提供Rocky Linux的镜像，但是由于centos与Rocky Linux的二进制文件是一样的，所以可以通过Rocky Linux给的脚本一键转换为Rocky Linux。
+
+注：在迁移完成后，在Rocky Linux迁移脚本的GitHub下看的的修复yum源的镜像链接，本人未经过验证，可以先用如下命令修改yum源，在用dnf update 更新系统后在运行迁移脚本。
+
+1234sed -i -r \    -e &#x27;s!^mirrorlist=!#mirrorlist=!&#x27; \    -e &#x27;s!^#?baseurl=http://(mirror|vault).centos.org/\$contentdir/\$releasever/!baseurl=https://dl ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/20417848.html" title="循环神经网络"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="循环神经网络"></a></div><div class="recent-post-info"><a class="article-title" href="/p/20417848.html" title="循环神经网络">循环神经网络</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-19T13:31:33.000Z" title="发表于 2022-02-19 21:31:33">2022-02-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">传统神经网络弊端
+
+如上图所示，如果我们的输入是这样一句话，希望输出是其中的人名，如果我们使用标准的神经网络建模，就会出现如下问题：
+①输入和输出数据在不同的例子中可能有不同长度。（每句话的长度都肯是不同的）
+②一个像这样的神经网络结构，它并不共享从文本的不同位置上学的的特征。以前的特征输入是稳定的，即所有的特征表达的内容是同一性质的，比如人名是一个特征域类别，其他的是其他类别，一旦他们交换位置，是需要重新取学习的(即人名在一句话中出现的位置是不固定的)，如果神经网络已经学习到了在位置1出现的Harry是人名，那么如果Harry出现在其他位置，可能就识别不出来了。
+③参数量巨大。输入网络的特征往往是one hot或embedding向量，维度较大，并且输入网络的特征是一段序列，当这段序列很长的时候，输入量是巨大的。
+④没有办法体现时序上的前因后果(比如翻译)。
+RNN循环神经网络
+网络结构
+
+一个典型的循环神经网络结构如上图所示.我们可以发现RNN的隐藏层与传统神经网络之间有所不同。我们将其隐藏层展开，RNN将每个时间状态关联了起来，当前状态不仅受当前输入的影响，也受上一时刻的状态的影 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/c6767314.html" title="卷积神经网络"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="卷积神经网络"></a></div><div class="recent-post-info"><a class="article-title" href="/p/c6767314.html" title="卷积神经网络">卷积神经网络</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-15T09:51:04.000Z" title="发表于 2022-02-15 17:51:04">2022-02-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">卷积
+对于连续型函数f，g，f函数和g函数的卷积公式为：
+f∗g(n)=∫−∞+∞f(x)g(n−x)dxf*g(n)=\int_{-\infty}^{+\infty}f(x)g(n-x)dx
+f∗g(n)=∫−∞+∞​f(x)g(n−x)dx
+f和g函数做卷积的实质是先对g函数取反然后在平移一个n在于f函数相乘在相加。
+
+对于离散函数，f函数和g函数的卷积公式为：
+f∗g(n)=∑mf(m)g(n−m)f*g(n)=\sum_{m}f(m)g(n-m)
+f∗g(n)=m∑​f(m)g(n−m)
+(n相当于步长)
+
+我们从图中可以看出，无论是连续型或者是离散型函数，做完卷积以后，得到的新的函数仍然保留了原来的函数的特征（比如对于连续型函数其卷积以后的图像趋势与原来的函数趋势仍非常相似)，所以卷积可以认为是一个滤波器，g函数对f函数做卷积，可以把f函数的重要特征抓取，非重要特征舍弃。
+图像的编码与卷积
+对于一个图采用像素编码。以32像素的灰度图为例，将一个图片的横向和纵向分别用32个像素进行编码，每个像素取值是0到255。像素越少处理的速度越快，当然特征损失的也会更多。
+
+那么该如何获得 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/e0b58f04.html" title="Linux开启swap"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux开启swap"></a></div><div class="recent-post-info"><a class="article-title" href="/p/e0b58f04.html" title="Linux开启swap">Linux开启swap</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-13T11:28:02.000Z" title="发表于 2022-02-13 19:28:02">2022-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">最近发现服务器内存占用率好高，经过排查修改了php-fpm的pm.max_children的值也没有多大改善，期间发现swap分区为0.就开始添加swap分区。
+1.创建一个swap文件
+12cd /usrmkdir swap
+2.创建swap分区文件
+123dd if=/dev/zero of=swapfile bs=1024 count=2000000#bs代表每个块大小，#count代表的是大小， 这里大约是2G
+3.挂载swap文件
+123swapon /usr/swap/swapfile#卸载swapswap /usr/swap/swapfile
+4.设置开机自动挂载
+123vim /etc/fastab#在文件最后增加/usr/swap/swapfile  swap swap default 0 0
+再来说下内存释放，最后重启内存占用正常了。😅😅😂😂果然重启解决90%问题。😊😊😊
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/c9452534.html" title="WordPress使用LateX"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="WordPress使用LateX"></a></div><div class="recent-post-info"><a class="article-title" href="/p/c9452534.html" title="WordPress使用LateX">WordPress使用LateX</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-11T14:15:15.000Z" title="发表于 2022-02-11 22:15:15">2022-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">由于WordPress不支持Latex公式，对要写一大堆公式的我很是难受，无奈投靠了Hexo，今天重要找到了办法。转载自：想在WordPress使用Latex？两行代码解决！ - 宅到没朋友 (weekreport.cn)
+很多人用WordPress建站作为自己的个人博客，平时写一些技术博客，有时必然会用到数学公式，Latex是编辑数学公式的利器，WordPress也有很多插件用来支持Latex，但如果你不想使用插件，或者担心插件拖慢你站点的速度该怎么办呢？
+其实只需要两行代码就可以解决问题！
+找到主题文件夹的header.php文件，在文件的与&lt;\head&gt;插入以下脚本：:
+1234&lt;!--MathJax show start--&gt;&lt;script&gt;MathJax = &#123;tex: &#123;inlineMath: [[&#x27;$&#x27;, &#x27;$&#x27;], [&#x27;\\(&#x27;, &#x27;\\)&#x27;]]&#125;, svg: &#123;fontCache: &#x27;global&#x2 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/5280b7e4.html" title="Windows开启Teredo隧道实现访问IPv6"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows开启Teredo隧道实现访问IPv6"></a></div><div class="recent-post-info"><a class="article-title" href="/p/5280b7e4.html" title="Windows开启Teredo隧道实现访问IPv6">Windows开启Teredo隧道实现访问IPv6</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-11T12:32:49.000Z" title="发表于 2022-02-11 20:32:49">2022-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">本文方法来自小御坂的破站
+Teredo是一个IPv6转换机制，它可以为运行在IPv4互联网但没有IPv6网络的设备提供IPv6联通性。在某些时候我们需要使用IPv6，所以就可以开启Teredo隧道来实现IPv6的访问。
+开启步骤
+1.以管理员身份打开Windows终端(powershell,cmd均可)，输入：
+1netsh interface teredo set state enterpriseclient server=default
+2.由于一般情况下Teredo隧道默认服务器会被屏蔽，所以需要使用备用服务器。
+1netsh interface teredo set state server=teredo.remlab.net
+3.关闭Teredo隧道
+1netsh interface teredo set state disable
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/802d5fe9.html" title="keras实现手写数字识别"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="keras实现手写数字识别"></a></div><div class="recent-post-info"><a class="article-title" href="/p/802d5fe9.html" title="keras实现手写数字识别">keras实现手写数字识别</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-11T04:02:07.000Z" title="发表于 2022-02-11 12:02:07">2022-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">TensorFlow和Kears的安装
+Keras是基于TensorFlow和Theano（由加拿大蒙特利尔大学开发的机器学习框架）的深度学习库，是由纯python编写而成的高层神经网络API，也仅支持python开发。它是为了支持快速实践而对tensorflow或者Theano的再次封装，让我们可以不用关注过多的底层细节，能够把想法快速转换为结果。它也很灵活，且比较容易学。
+在新版得TensorFlow中已经包含了Keras，所以我们只用安装TresorFlow即可。
+TensorFlow安装：
+12#在终端或powershell中输入pip install tensorflow #默认安装CPU和GPU版本
+如果不是英伟达的GPU，由于不支持CUDA，安装GPU版本在调用时会报如下错误：
+12Could not load dynamic library &#x27;libcudart.so.10.1&#x27;; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/4f98a72.html" title="BP神经网络"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BP神经网络"></a></div><div class="recent-post-info"><a class="article-title" href="/p/4f98a72.html" title="BP神经网络">BP神经网络</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-11T03:57:49.000Z" title="发表于 2022-02-11 11:57:49">2022-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">感知机
+1.感知机模型
+
+如图为人体神经网络图，输入信号从树突传入，在细胞核处汇总，输出信号从轴突处传出传入其他神经元，从而构成了一个人体的神经网络。而感知机其类似于一个神经元。
+
+一个单层感知机与人体神经元类似，x1，x2,x3x_{1}，x_{2},x_{3}x1​，x2​,x3​为输入结点，及神经元的输入信号，w1,w2,w3w_{1},w_{2},w_{3}w1​,w2​,w3​为各输入结点的权重，可以理解为神经元各个树突的电阻，到达细胞核后通过进行汇总，通过一个激活函数处理后进行输出。其中，w和b称为感知机模型参数，w 叫做权重，b叫做偏置，f为激活函数，其表达式为：
+sign(x)={1,x&gt;=0−1,x&lt;0(1)sign(x)=
+\begin{cases}
+1,x&gt;=0\\
+-1, x&lt;0
+\end{cases}
+\tag{1}
+sign(x)={1,x&gt;=0−1,x&lt;0​(1)
+
+为了方便矩阵运算，将添加一个输入恒为1的输入信号x_{0},其对应的权重w_{0}即为偏置项b。多个感知机组合起来就构成了神经网络。
+ 从感知机的激活函数的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/d7acd9bb.html" title="pandas(大水文)"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pandas(大水文)"></a></div><div class="recent-post-info"><a class="article-title" href="/p/d7acd9bb.html" title="pandas(大水文)">pandas(大水文)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-05T09:01:25.000Z" title="发表于 2022-02-05 17:01:25">2022-02-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/">科学计算库</a></span></div><div class="content">大水文罢了。😁😁😁😁😅
+1import pandas as pd
+Series 操作
+Series 创建
+12t=pd.Series([1,2,3,4,5])#Series是一维的数据，带标签的数组t#第一列为索引 第二列是我们的数据
+0    1
+1    2
+2    3
+3    4
+4    5
+dtype: int64
+
+12t2=pd.Series([1,2,3,4,5],index=[&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;e&#x27;])t2#index里面为索引
+a    1
+b    2
+c    3
+d    4
+e    5
+dtype: int64
+
+123456#通过字典来创建Series   temp_dict=&#123;&quot;name&quot;:&quot;wangsheng&quot;,            &quot;age&quot;:100,            &quot;tel&quot;:10086&#125;t3=pd.Serie ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/liwangsheng.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">李忘生</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liwangshengya"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/liwangshengya" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/yxliwangsheng@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/wangshengya" target="_blank" title="Telegrame"><i class="fa-brands fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/p/337fcc87.html" title="MySQL基础篇"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL基础篇"/></a><div class="content"><a class="title" href="/p/337fcc87.html" title="MySQL基础篇">MySQL基础篇</a><time datetime="2022-12-27T03:51:45.000Z" title="发表于 2022-12-27 11:51:45">2022-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/1a130924.html" title="黑马C++讲义(提高编程)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(提高编程)"/></a><div class="content"><a class="title" href="/p/1a130924.html" title="黑马C++讲义(提高编程)">黑马C++讲义(提高编程)</a><time datetime="2022-12-24T04:17:15.000Z" title="发表于 2022-12-24 12:17:15">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(核心编程)"/></a><div class="content"><a class="title" href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)">黑马C++讲义(核心编程)</a><time datetime="2022-12-24T04:09:21.000Z" title="发表于 2022-12-24 12:09:21">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/c861e813.html" title="黑马C++讲义(基础入门)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(基础入门)"/></a><div class="content"><a class="title" href="/p/c861e813.html" title="黑马C++讲义(基础入门)">黑马C++讲义(基础入门)</a><time datetime="2022-12-24T04:02:03.000Z" title="发表于 2022-12-24 12:02:03">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="openGL(FreeGlut和GLFW)环境配置"/></a><div class="content"><a class="title" href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置">openGL(FreeGlut和GLFW)环境配置</a><time datetime="2022-09-07T15:00:55.000Z" title="发表于 2022-09-07 23:00:55">2022-09-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Computer-Graphics/"><span class="card-category-list-name">Computer Graphics</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/"><span class="card-category-list-name">SQL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/VPS/"><span class="card-category-list-name">VPS</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"><span class="card-category-list-name">推荐系统</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">机器学习</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/"><span class="card-category-list-name">科学计算库</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/BP%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">BP算法</a> <a href="/tags/C/" style="font-size: 1.3em; color: #99a1ac">C++</a> <a href="/tags/CG-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-OpenGL-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.1em; color: #999">CG - 计算机图形学 - OpenGL - 环境配置</a> <a href="/tags/GAN/" style="font-size: 1.1em; color: #999">GAN</a> <a href="/tags/Github/" style="font-size: 1.1em; color: #999">Github</a> <a href="/tags/IPv6/" style="font-size: 1.1em; color: #999">IPv6</a> <a href="/tags/Keras/" style="font-size: 1.1em; color: #999">Keras</a> <a href="/tags/LateX/" style="font-size: 1.1em; color: #999">LateX</a> <a href="/tags/LeNet/" style="font-size: 1.1em; color: #999">LeNet</a> <a href="/tags/Linux/" style="font-size: 1.3em; color: #99a1ac">Linux</a> <a href="/tags/MinSt/" style="font-size: 1.1em; color: #999">MinSt</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Numpy/" style="font-size: 1.1em; color: #999">Numpy</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/TensorFlow/" style="font-size: 1.1em; color: #999">TensorFlow</a> <a href="/tags/VAE/" style="font-size: 1.1em; color: #999">VAE</a> <a href="/tags/VPS/" style="font-size: 1.2em; color: #999da3">VPS</a> <a href="/tags/Windows/" style="font-size: 1.1em; color: #999">Windows</a> <a href="/tags/WordPress/" style="font-size: 1.1em; color: #999">WordPress</a> <a href="/tags/centos/" style="font-size: 1.1em; color: #999">centos</a> <a href="/tags/git/" style="font-size: 1.1em; color: #999">git</a> <a href="/tags/rocky-linux/" style="font-size: 1.1em; color: #999">rocky linux</a> <a href="/tags/swap/" style="font-size: 1.1em; color: #999">swap</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 1.1em; color: #999">决策树</a> <a href="/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4/" style="font-size: 1.2em; color: #999da3">协同过滤</a> <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">卷积神经网络</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" style="font-size: 1.1em; color: #999">反向传播</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 1.1em; color: #999">宝塔面板</a> <a href="/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">循环神经网络</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 1.1em; color: #999">感知机</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 1.4em; color: #99a5b6">推荐系统</a> <a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">无监督学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.5em; color: #99a9bf">机器学习</a> <a href="/tags/%E6%B0%B4%E6%96%87/" style="font-size: 1.1em; color: #999">水文</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.2em; color: #999da3">深度学习</a> <a href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" style="font-size: 1.2em; color: #999da3">监督学习</a> <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/" style="font-size: 1.1em; color: #999">矩阵分解</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.3em; color: #99a1ac">神经网络</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/" style="font-size: 1.2em; color: #999da3">科学计算库</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">六月 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">二月 2022</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">9</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">32</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-12-29T06:30:45.135Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">163.3k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-12-29T06:30:45.233Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 李忘生</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome to my blog!😊</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function subtitleType () {
+  getScript('https://yijuzhan.com/api/word.php?m=js').then(() => {
+    const con = str[0]
+    if (true) {
+      const from = '出自 ' + str[1]
+      const sub = []
+      sub.unshift(con, from)
+      window.typed = new Typed('#subtitle', {
+        strings: sub,
+        startDelay: 300,
+        typeSpeed: 150,
+        loop: true,
+        backSpeed: 50,
+      })
+    } else {
+      document.getElementById('subtitle').innerHTML = con
+    }
+  })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

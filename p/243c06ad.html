@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>降维 | 忘生的blog</title><meta name="keywords" content="算法,机器学习,降维"><meta name="author" content="李忘生"><meta name="copyright" content="李忘生"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="降维  当我们处理待处理样本数据的特征过多，而其中有些特征有有些重复，计算起来速度较慢，我们可以采用降维算法。 假使我们要采用两种不的仪器来测量一些东西的尺寸，其中一个仪器测量结果的单位是英寸，另一个仪器测量的结果是厘米，我们希望将测量的结果作为我们机器学习的特征。现在的问题的是，两种仪器对同一个东西测量的结果不完全相等（由于误差、精度等），而将两者都作为特征有些重复，因而，我们希望将这个二维的数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="降维">
+<meta property="og:url" content="https://hexo.chunyang.eu.org/p/243c06ad.html">
+<meta property="og:site_name" content="忘生的blog">
+<meta property="og:description" content="降维  当我们处理待处理样本数据的特征过多，而其中有些特征有有些重复，计算起来速度较慢，我们可以采用降维算法。 假使我们要采用两种不的仪器来测量一些东西的尺寸，其中一个仪器测量结果的单位是英寸，另一个仪器测量的结果是厘米，我们希望将测量的结果作为我们机器学习的特征。现在的问题的是，两种仪器对同一个东西测量的结果不完全相等（由于误差、精度等），而将两者都作为特征有些重复，因而，我们希望将这个二维的数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2022-01-29T13:59:57.000Z">
+<meta property="article:modified_time" content="2022-09-07T12:10:40.250Z">
+<meta property="article:author" content="李忘生">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="降维">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hexo.chunyang.eu.org/p/243c06ad"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"GQI1E1W197","apiKey":"e87ab2563de562be49f9ae8786744569","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '降维',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-07 20:10:40'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/liwangsheng.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">忘生的blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">降维</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-29T13:59:57.000Z" title="发表于 2022-01-29 21:59:57">2022-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-07T12:10:40.250Z" title="更新于 2022-09-07 20:10:40">2022-09-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="降维"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="降维">降维</h4>
+<p> 当我们处理待处理样本数据的特征过多，而其中有些特征有有些重复，计算起来速度较慢，我们可以采用降维算法。 假使我们要采用两种不的仪器来测量一些东西的尺寸，其中一个仪器测量结果的单位是英寸，另一个仪器测量的结果是厘米，我们希望将测量的结果作为我们机器学习的特征。现在的问题的是，两种仪器对同一个东西测量的结果不完全相等（由于误差、精度等），而将两者都作为特征有些重复，因而，我们希望将这个二维的数据降至一维.将数据从二维降至一维的过程就叫做降维。<br>
+<img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/20220130114733.png" alt="20220130114733"><br>
+如图所示，将所有在一个平面上的样本点转换到一条直线上，将一组两维的数据用一组一维的来表示，这就是将二维数据降为一维。<br>
+而对于三维的数据我们可以降维两维，将所有的样本点投影至一个平面。<br>
+<img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/20220130115449.png" alt="20220130115449"></p>
+<h4 id="为什么要降维">为什么要降维</h4>
+<h5 id="数据压缩">数据压缩</h5>
+<p>数据压缩可以使用较少的计算机内存或磁盘空间，同时也可以加速我们的学习算法。对于一些特征数量较高的样本数据，如果不进行数据压缩，计算量会非常的大，学习的速度太慢。</p>
+<h5 id="数据可视化">数据可视化</h5>
+<p>在许多机器学习问题中，如果我们能将数据可视化，我们就有可能寻找到一个更好的解决方案。这时候就用到了降维。<br>
+<img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/20220130115842.png" alt="20220130115842"><br>
+假设我们有许多关于不同国家的数据，每个特征向量都有50个特征，如果要将这50维数据可视化是不可能的的，如果我们能通过降维的方法将其降至2维，就可以进行可视化了。</p>
+<h4 id="主成成分分析-PCA-算法">主成成分分析(PCA)算法</h4>
+<p>主成成分分析(Principal components analysis 简称PCA)是最重要的的降维方法之一。。PCA算法要做的就是找出数据里面的主要的方面，用其来代替原始的数据。在PCA中，我们要做的就是找到一个方向向量，当把所有的数据都投射到该向量上时，我们希望投射的平均均方误差尽可能的小。<br>
+<img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/20220130120952.png" alt="20220130120952"><br>
+在图中所示的数据中，我们选择红色的线作为方向向量，而不选择粉红色的线就是应为其平均均方误差小。</p>
+<h5 id="PCA与线性回归的区别">PCA与线性回归的区别</h5>
+<p><img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/20220130121235.png" alt="20220130121235"><br>
+如图所示，左边是线性回归的误差(垂直于横轴方向)，线性回归尝试最小化的是预测误差，来预测结果；右边是PCA的误差，垂直于方向向量，最小化的是投射误差，并不会做任何预测。</p>
+<h5 id="PCA算法流程">PCA算法流程</h5>
+<p>1.数据预处理：中心化X-<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>x</mi><mo stretchy="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">\overline{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6306em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6306em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span><span style="top:-3.5506em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span></span></span></span><br>
+2.求样本的协方差矩阵<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mi>m</mi></mfrac><mi>X</mi><msup><mi>X</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">\frac{1}{m}XX^{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span><br>
+3.对协方差<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mi>m</mi></mfrac><mi>X</mi><msup><mi>X</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">\frac{1}{m}XX^{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span>矩阵做特征值分解。<br>
+4.选出最大的k个特征值对于的k个特征向量<br>
+5.将原始数据投影到选取的特征向量上。<br>
+6.输出投影后的数据集。<br>
+证明过程看不太懂😭，所以这里仅给出算法流程，具体证明过程可以去看下面这篇博客：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6239403.html">主成分分析（PCA）原理总结</a></p>
+<h4 id="PCA实现">PCA实现</h4>
+<h5 id="python实现-2">python实现</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pylab <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#载入数据</span></span><br><span class="line">data=np.genfromtxt(<span class="string">&#x27;data.csv&#x27;</span>,delimiter=<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">x_data=data[:,<span class="number">0</span>]</span><br><span class="line">y_data=data[:,<span class="number">1</span>]</span><br><span class="line">plt.scatter(x_data,y_data)</span><br><span class="line">plt.show()</span><br><span class="line">data.shape</span><br></pre></td></tr></table></figure>
+<p>​<br>
+<img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202201301444024.png" alt="png"><br>
+​</p>
+<pre><code>(100, 2)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#去中心化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zeroMean</span>(<span class="params">dataMat</span>):</span></span><br><span class="line">    <span class="comment">#按列求各个特征的平均值</span></span><br><span class="line">    meanMaT=np.mean(dataMat,axis=<span class="number">0</span>)</span><br><span class="line">    newMat=dataMat-meanMaT</span><br><span class="line">    <span class="keyword">return</span> newMat,meanMaT</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">newMat,meanMat=zeroMean(data)</span><br><span class="line"><span class="comment">#np.cov 用于求协方差矩阵，参数rowvar说明数据一行代表一个样本</span></span><br><span class="line">covMat=np.cov(newMat,rowvar=<span class="number">0</span>)</span><br><span class="line">covMat<span class="comment">#协方差矩阵</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([[ 94.99190951, 125.62024804],
+       [125.62024804, 277.49520751]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#也可以用 (X.T * X)/m直接来算</span></span><br><span class="line">newMat.T.dot(newMat)/newMat.shape[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>array([[ 94.04199041, 124.36404556],
+       [124.36404556, 274.72025544]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#np.linalg.eig求矩阵特征值和特征向量</span></span><br><span class="line">eigVal,eigVects=np.linalg.eig(np.mat(covMat))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#特征值</span></span><br><span class="line">eigVal</span><br></pre></td></tr></table></figure>
+<pre><code>array([ 30.97826888, 341.50884814])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#特征向量</span></span><br><span class="line">eigVects</span><br></pre></td></tr></table></figure>
+<pre><code>matrix([[-0.89098665, -0.45402951],
+        [ 0.45402951, -0.89098665]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#对特征值从小到大排序</span></span><br><span class="line">eigValIndex=np.argsort(eigVal)</span><br><span class="line">eigValIndex</span><br></pre></td></tr></table></figure>
+<pre><code>array([0, 1], dtype=int64)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">k=<span class="number">1</span> <span class="comment">#降为k维</span></span><br><span class="line">n_eigValIndex=eigValIndex[-<span class="number">1</span>:-(k+<span class="number">1</span>):-<span class="number">1</span>]</span><br><span class="line"><span class="comment">#最后一个-1是代表从右向左取数</span></span><br><span class="line">n_eigValIndex</span><br></pre></td></tr></table></figure>
+<pre><code>array([1], dtype=int64)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#最大的n个特征值所对应的特征向量</span></span><br><span class="line">n_eigVect=eigVects[:,n_eigValIndex]</span><br><span class="line">n_eigVect</span><br></pre></td></tr></table></figure>
+<pre><code>matrix([[-0.45402951],
+        [-0.89098665]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#降维后的数据</span></span><br><span class="line">lowdata=newMat*n_eigVect</span><br><span class="line">lowdata[:<span class="number">5</span>,:]</span><br></pre></td></tr></table></figure>
+<pre><code>matrix([[ 44.02694787],
+        [  1.49722533],
+        [  3.35564513],
+        [  1.73205523],
+        [-17.84406034]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用低纬度数据来重构数据</span></span><br><span class="line">recoMat=(lowdata*n_eigVect.T)+meanMat</span><br><span class="line">recoMat[:<span class="number">5</span>,:]</span><br></pre></td></tr></table></figure>
+<pre><code>matrix([[28.96880808, 33.50762783],
+        [48.27855698, 71.40104277],
+        [47.43477956, 69.74521555],
+        [48.17193728, 71.19181247],
+        [57.06007136, 88.63387007]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(x_data,y_data)</span><br><span class="line">plt.scatter(np.array(recoMat)[:,<span class="number">0</span>],np.array(recoMat)[:,<span class="number">1</span>],c=<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202201301444387.png" alt="png"></p>
+<h5 id="sklearn实现-4">sklearn实现</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line">model=PCA(n_components=<span class="number">1</span>)<span class="comment">#n_components 表示降维后的维数</span></span><br><span class="line">model.fit(data)</span><br></pre></td></tr></table></figure>
+<pre><code>PCA(n_components=1)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.explained_variance_<span class="comment">#特征值</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([341.50884814])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.explained_variance_ratio_<span class="comment">#所保留的n个成分各自的方差百分比</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([0.91683399])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.components_<span class="comment">#特征向量</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([[0.45402951, 0.89098665]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new_data=model.transform(data)<span class="comment">#降维后的数据</span></span><br><span class="line">new_data[:<span class="number">5</span>,:]</span><br></pre></td></tr></table></figure>
+<pre><code>array([[-44.02694787],
+       [ -1.49722533],
+       [ -3.35564513],
+       [ -1.73205523],
+       [ 17.84406034]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">recdata=model.inverse_transform(new_data)<span class="comment">#将降维后的数据还原</span></span><br><span class="line">plt.scatter(data[:,<span class="number">0</span>],data[:,<span class="number">1</span>])</span><br><span class="line">plt.scatter(recdata[:,<span class="number">0</span>],recdata[:,<span class="number">1</span>],c=<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202201301444253.png" alt="png"></p>
+<h4 id="PCA算法优缺点">PCA算法优缺点</h4>
+<h5 id="优点-2">优点</h5>
+<p>1.仅仅需要以方差衡量信息量，不受数据集以外的因素影响<br>
+2.各主成成分之间正交，可以消除原始数据成分间的相互影响的因素<br>
+3.计算方法简单，主要运算是特征值分解，易于实现</p>
+<h5 id="缺点-3">缺点</h5>
+<p>1.主成成分各个特征维度的含义具有一定的模糊性，不如原始样本解释性强<br>
+2.方差小的非主成成分也可能含有对样本差异的重要信息，因降维丢弃可能对后续数据处理有影响</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://hexo.chunyang.eu.org">李忘生</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hexo.chunyang.eu.org/p/243c06ad.html">https://hexo.chunyang.eu.org/p/243c06ad.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hexo.chunyang.eu.org" target="_blank">忘生的blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E9%99%8D%E7%BB%B4/">降维</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/p/b8045ef9.html"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">推荐系统</div></div></a></div><div class="next-post pull-right"><a href="/p/8ddc7426.html"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">决策树</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/p/bea38547.html" title="K近邻算法(kNN)"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-28</div><div class="title">K近邻算法(kNN)</div></div></a></div><div><a href="/p/73e45c68.html" title="协同过滤"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-02</div><div class="title">协同过滤</div></div></a></div><div><a href="/p/8ddc7426.html" title="决策树"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-29</div><div class="title">决策树</div></div></a></div><div><a href="/p/46823193.html" title="矩阵分解"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-29</div><div class="title">矩阵分解</div></div></a></div><div><a href="/p/40997091.html" title="线性回归"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-29</div><div class="title">线性回归</div></div></a></div><div><a href="/p/186e9376.html" title="聚类"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-28</div><div class="title">聚类</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/liwangsheng.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">李忘生</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liwangshengya"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/liwangshengya" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/yxliwangsheng@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/wangshengya" target="_blank" title="Telegrame"><i class="fa-brands fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%8D%E7%BB%B4"><span class="toc-number">1.</span> <span class="toc-text">降维</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%99%8D%E7%BB%B4"><span class="toc-number">2.</span> <span class="toc-text">为什么要降维</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9"><span class="toc-number">2.1.</span> <span class="toc-text">数据压缩</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">数据可视化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%88%90%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-PCA-%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">主成成分分析(PCA)算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#PCA%E4%B8%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.1.</span> <span class="toc-text">PCA与线性回归的区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PCA%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">PCA算法流程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PCA%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">PCA实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#python%E5%AE%9E%E7%8E%B0-2"><span class="toc-number">4.1.</span> <span class="toc-text">python实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sklearn%E5%AE%9E%E7%8E%B0-4"><span class="toc-number">4.2.</span> <span class="toc-text">sklearn实现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PCA%E7%AE%97%E6%B3%95%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">PCA算法优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-2"><span class="toc-number">5.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-3"><span class="toc-number">5.2.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/p/337fcc87.html" title="MySQL基础篇"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL基础篇"/></a><div class="content"><a class="title" href="/p/337fcc87.html" title="MySQL基础篇">MySQL基础篇</a><time datetime="2022-12-27T03:51:45.000Z" title="发表于 2022-12-27 11:51:45">2022-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/1a130924.html" title="黑马C++讲义(提高编程)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(提高编程)"/></a><div class="content"><a class="title" href="/p/1a130924.html" title="黑马C++讲义(提高编程)">黑马C++讲义(提高编程)</a><time datetime="2022-12-24T04:17:15.000Z" title="发表于 2022-12-24 12:17:15">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(核心编程)"/></a><div class="content"><a class="title" href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)">黑马C++讲义(核心编程)</a><time datetime="2022-12-24T04:09:21.000Z" title="发表于 2022-12-24 12:09:21">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/c861e813.html" title="黑马C++讲义(基础入门)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(基础入门)"/></a><div class="content"><a class="title" href="/p/c861e813.html" title="黑马C++讲义(基础入门)">黑马C++讲义(基础入门)</a><time datetime="2022-12-24T04:02:03.000Z" title="发表于 2022-12-24 12:02:03">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="openGL(FreeGlut和GLFW)环境配置"/></a><div class="content"><a class="title" href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置">openGL(FreeGlut和GLFW)环境配置</a><time datetime="2022-09-07T15:00:55.000Z" title="发表于 2022-09-07 23:00:55">2022-09-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 李忘生</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome to my blog!😊</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

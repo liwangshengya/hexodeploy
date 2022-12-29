@@ -1,0 +1,470 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>忘生的blog</title><meta name="author" content="李忘生"><meta name="copyright" content="李忘生"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="忘生的blog">
+<meta property="og:url" content="https://hexo.chunyang.eu.org/index.html">
+<meta property="og:site_name" content="忘生的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexo.chunyang.eu.org/img/liwangsheng.png">
+<meta property="article:author" content="李忘生">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexo.chunyang.eu.org/img/liwangsheng.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hexo.chunyang.eu.org/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"GQI1E1W197","apiKey":"e87ab2563de562be49f9ae8786744569","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '忘生的blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-12-29 14:30:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/liwangsheng.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/liwangshengya/picture/img/202201281354528.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">忘生的blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">忘生的blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/liwangshengya" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/yxliwangsheng@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/wangshengya" target="_blank" title="Telegrame"><i class="fa-brands fa-telegram"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/p/337fcc87.html" title="MySQL基础篇"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL基础篇"></a></div><div class="recent-post-info"><a class="article-title" href="/p/337fcc87.html" title="MySQL基础篇">MySQL基础篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-27T03:51:45.000Z" title="发表于 2022-12-27 11:51:45">2022-12-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a></span></div><div class="content">1.MySQL概述
+1.1数据库概念相关
+在这一部分，我们先来讲解三个概念：数据库、数据库管理系统、SQL。
+
+
+
+名称
+全称
+简称
+
+
+
+
+数据库
+存储数据的仓库
+DataBase(DB)
+
+
+数据库管理系统
+操作和管理数据库的大型软件
+DataBase Management
+
+
+System (DBMS)
+
+
+
+
+SQL
+操作关系型数据库的编程语言，定义了一套操作关系型数据库统一标准
+Structured Query Language (SQL)
+
+
+
+
+1.2 安装
+这里我直接使用docker镜像了，其run过程如下：
+1234567891011121314151617181920#拉取mysql镜像docker pull mysql:latest  #运行容器##参数说明：#-p 3306:3306 ：映射容器服务的 3306 端口到宿主机的 3306 端口，外部主机可以直接通过 宿主机ip:3306 访问到 MySQL 的服务。#MYSQL_ROOT_PASSWORD=123456：设置 MySQL 服务 root 用户的密码。docker run -itd --name m ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/1a130924.html" title="黑马C++讲义(提高编程)"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(提高编程)"></a></div><div class="recent-post-info"><a class="article-title" href="/p/1a130924.html" title="黑马C++讲义(提高编程)">黑马C++讲义(提高编程)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-24T04:17:15.000Z" title="发表于 2022-12-24 12:17:15">2022-12-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span></div><div class="content">C++提高编程
+
+本阶段主要针对C++==泛型编程==和==STL==技术做详细讲解，探讨C++更深层的使用
+
+1 模板
+1.1 模板的概念
+模板就是建立通用的模具，大大提高复用性
+例如生活中的模板
+一寸照片模板：
+
+PPT模板：
+
+
+模板的特点：
+
+模板不可以直接使用，它只是一个框架
+模板的通用并不是万能的
+
+1.2 函数模板
+
+C++另一种编程思想称为 ==泛型编程== ，主要利用的技术就是模板
+C++提供两种模板机制:函数模板和类模板
+
+1.2.1 函数模板语法
+函数模板作用：
+建立一个通用函数，其函数返回值类型和形参类型可以不具体制定，用一个虚拟的类型来代表。
+语法：
+12template&lt;typename T&gt;函数声明或定义
+解释：
+template  —  声明创建模板
+typename  — 表面其后面的符号是一种数据类型，可以用class代替
+T    —   通用的数据类型，名称可以替换，通常为大写字母
+示例：
+1234567891011121314151617181920212223242526272829303132333435363738394041 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(核心编程)"></a></div><div class="recent-post-info"><a class="article-title" href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)">黑马C++讲义(核心编程)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-24T04:09:21.000Z" title="发表于 2022-12-24 12:09:21">2022-12-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span></div><div class="content">C++核心编程
+本阶段主要针对C++==面向对象==编程技术做详细讲解，探讨C++中的核心和精髓。
+1 内存分区模型
+C++程序在执行时，将内存大方向划分为4个区域
+
+代码区：存放函数体的二进制代码，由操作系统进行管理的
+全局区：存放全局变量和静态变量以及常量
+栈区：由编译器自动分配释放, 存放函数的参数值,局部变量等
+堆区：由程序员分配和释放,若程序员不释放,程序结束时由操作系统回收
+
+内存四区意义：
+不同区域存放的数据，赋予不同的生命周期, 给我们更大的灵活编程
+1.1 程序运行前
+在程序编译后，生成了exe可执行程序，**未执行该程序前**分为两个区域
+
+**代码区：**
+
+存放 CPU 执行的机器指令
+
+代码区是**共享**的，共享的目的是对于频繁被执行的程序，只需要在内存中有一份代码即可
+
+代码区是**只读**的，使其只读的原因是防止程序意外地修改了它的指令
+
+**全局区：**
+
+全局变量和静态变量存放在此.
+
+全局区还包含了常量区, 字符串常量和其他常量也存放在此.
+
+==该区域的数据在程序结束后由操作系统释放==.
+
+示例：
+12345678910111213141516 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/c861e813.html" title="黑马C++讲义(基础入门)"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(基础入门)"></a></div><div class="recent-post-info"><a class="article-title" href="/p/c861e813.html" title="黑马C++讲义(基础入门)">黑马C++讲义(基础入门)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-24T04:02:03.000Z" title="发表于 2022-12-24 12:02:03">2022-12-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span></div><div class="content">C++基础入门
+1 C++初识
+1.1  第一个C++程序
+编写一个C++程序总共分为4个步骤
+
+创建项目
+创建文件
+编写代码
+运行程序
+
+1.1.1 创建项目
+Visual Studio是我们用来编写C++程序的主要工具，我们先将它打开
+
+
+
+1.1.2 创建文件
+右键源文件，选择添加-&gt;新建项
+
+给C++文件起个名称，然后点击添加即可。
+
+1.1.3 编写代码
+1234567891011#include&lt;iostream&gt;using namespace std;int main() &#123;	cout &lt;&lt; &quot;Hello world&quot; &lt;&lt; endl;	system(&quot;pause&quot;);	return 0;&#125;
+1.1.4 运行程序
+
+1.2 注释
+作用：在代码中加一些说明和解释，方便自己或其他程序员程序员阅读代码
+两种格式
+
+单行注释：// 描述信息
+
+通常放在一行代码的上方，或者一条语句的末尾，==对该行代码说明==
+
+
+多行注释： /* 描述信息 */
+
+通常放在一段代码的上方，==对 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="openGL(FreeGlut和GLFW)环境配置"></a></div><div class="recent-post-info"><a class="article-title" href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置">openGL(FreeGlut和GLFW)环境配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-07T15:00:55.000Z" title="发表于 2022-09-07 23:00:55">2022-09-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Computer-Graphics/">Computer Graphics</a></span></div><div class="content">本篇介绍一下windows平台下，Visual Studio作为IDE下的OpenGL的环境配置问题，本文主要分为两个部分，分别介绍FreeGlut和GLFW这两个OpenGL环境的配置。
+FreeGlut环境配置
+下载freeglut源码
+在freeglut官网(网址：http://freeglut.sourceforge.net/)下载最新版的freeglut的源代码。
+
+编译freeglut
+下载cmake
+由于我们下载的是源代码，并不是编译好的二进制文件，所以需要我们自己进行编译。
+首先我们下载Cmake，在cmake官网(https://cmake.org/download/)根据自己的平台下载最新版本的Cmake。这里有已经编译好的二进制文件，我们直接下载二进制文件即可。
+
+这里下载msi安装文件或者zip的压缩文件均可。
+打开下载后的cmake-gui，为如图所示的样子：
+
+编译freeglut
+souce code位置填写我们下载下来的freeglut源码解压后的文件夹位置，build the binaries填写我们要将编译好的二进制文件保存的位置(自己创建)，然后点 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/66fa6298.html" title="Causal Inference"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Causal Inference"></a></div><div class="recent-post-info"><a class="article-title" href="/p/66fa6298.html" title="Causal Inference">Causal Inference</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-16T02:22:34.000Z" title="发表于 2022-08-16 10:22:34">2022-08-16</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/b381ed30.html" title="BPR"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BPR"></a></div><div class="recent-post-info"><a class="article-title" href="/p/b381ed30.html" title="BPR">BPR</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-17T07:42:06.000Z" title="发表于 2022-06-17 15:42:06">2022-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></span></div><div class="content">BPR 算法
+显式反馈：用户对物品的评分，如电影评分；隐式反馈：用户对物品的交互行为，如浏览，购买等，现实中绝大部分数据属于隐式反馈，可以从日志中获取。BPR是基于用户的隐式反馈，为用户提供物品的推荐，并且是直接对排序进行优化。贝叶斯个性化排序（Bayesian personalized ranking，BPR）是一种 Pairwise 方法，并且借鉴了矩阵分解的思路。在开始深入讲解原理之前我们先了解整个 BPR 的基础假设以及基本设定。
+因为是基于贝叶斯的 Pairwise 方法，BPR 有两个基本假设：
+
+每个用户之间的偏好行为相互独立，即用户 u 在商品 i 和 j 之间的偏好和其他用户无关。
+同一用户对不同物品的偏序相互独立，也就是用户 u 在商品 i 和 j 之间的偏好和其他的商品无关。
+
+这里补充一下Pairwise。配对法(Pairwise)的基本思路是对样本进行两两比较，构建偏序文档对，从比较中学习排序，因为对于一个查询关键字来说，最重要的其实不是针对某一个文档的相关性是否估计得准确，而是要能够正确估计一组文档之间的 “相对关系”。
+因此，Pairwise 的训练集样本 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/defa1968.html" title="NeuralCF"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NeuralCF"></a></div><div class="recent-post-info"><a class="article-title" href="/p/defa1968.html" title="NeuralCF">NeuralCF</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-17T00:35:31.000Z" title="发表于 2022-06-17 08:35:31">2022-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></span></div><div class="content">本文主要参考了NeuralCf的论文，及王喆的《深度学习与推荐系统》一书，文中的图片也都来自于此。
+NeuralCF论文中文翻译
+在前边我们学习了矩阵分解，我们从深度学习视角看待矩阵分解，其中矩阵分解中的用户隐向量和物品隐向量完全可以看作是一种Embedding方法，最终的输出就是用户隐向量和物品隐向量进行内积操作得到最终的评分预测。如果我们用神经网络来描述这个过程的话就是如下图所示：
+
+是不是觉得模型的结构过于简单了呢，两个隐向量之间仅仅通过一个内积就输出了，所以也就会导致矩阵分解模型常常处于欠拟合的状态，无法对优化目标进行有效的拟合。
+在NeuralCF的论文中作者也举了一个例子来说明通过内积来预测评分的不可靠性。
+
+上图说明了内积如何限制了MF的表达能力。
+为了更好的解释实例，我们明确两种设置：
+
+MF将用户和物品映射到相同的潜在空间中，因此可以用内积衡量两个用户之间的相似性，也可以等效为他们潜在向量之间的夹角的余弦。
+使用Jaccard系数作为相似性系数
+
+
+首先，我们关注图(a)的前三行用户，很容易得到s23(0.66)&gt;s12(0.5)&gt;s13(0.4)s_{2 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/p/4a17b156.html" title="Hello World"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"></a></div><div class="recent-post-info"><a class="article-title" href="/p/4a17b156.html" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-06-12T02:37:23.788Z" title="发表于 2022-06-12 10:37:23">2022-06-12</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick Start
+Create a new post
+1$ hexo new &quot;My New Post&quot;
+More info: Writing
+Run server
+1$ hexo server
+More info: Server
+Generate static files
+1$ hexo generate
+More info: Generating
+Deploy to remote sites
+1$ hexo deploy
+More info: Deployment
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/p/7790d057.html" title="生成模型"><img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="生成模型"></a></div><div class="recent-post-info"><a class="article-title" href="/p/7790d057.html" title="生成模型">生成模型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-11T14:46:03.000Z" title="发表于 2022-04-11 22:46:03">2022-04-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">生成模型：给定训练集，产生与训练集同分布的新样本。即如下图所示希望学到一个模型pmodel(x)p_{model}(x)pmodel​(x),其训练样本的分布pdata(x)p_{data}(x)pdata​(x)相近。假设我们给定了一万张二次元头像的图片，通过对这一万张图片学习之后得到的模型知道如何这些图片是如何产生的，并且可以生成出与新的二次元图片，并与原来的图片是同一类的(即同分布)。但我们的原来的图片的特征空间的分布我们是不知道的，我们的目标就是寻找一个与其同概率密度函数的模型，从该模型从去采样得到的样本就是我们想要生成的图片。
+
+所以这里就是无监督学习里面的问题:密度估计问题。其主要学习思路主要有两类：
+
+一类是显示的密度估计：显示的定义并求解分布pmodel(x)p_{model}(x)pmodel​(x)，主要有PixelRNN/PixelCNN和VAE。
+另一类是隐式的密度估计：学习一个模型Pmodel(x)P_{model}(x)Pmodel​(x)，而无需定义它。主要有GAN，GSN。
+
+PixelRNN与PixelCNN
+PixelRNN
+这是一个显示的密度模型。 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/liwangsheng.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">李忘生</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liwangshengya"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/liwangshengya" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/yxliwangsheng@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://t.me/wangshengya" target="_blank" title="Telegrame"><i class="fa-brands fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/p/337fcc87.html" title="MySQL基础篇"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL基础篇"/></a><div class="content"><a class="title" href="/p/337fcc87.html" title="MySQL基础篇">MySQL基础篇</a><time datetime="2022-12-27T03:51:45.000Z" title="发表于 2022-12-27 11:51:45">2022-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/1a130924.html" title="黑马C++讲义(提高编程)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(提高编程)"/></a><div class="content"><a class="title" href="/p/1a130924.html" title="黑马C++讲义(提高编程)">黑马C++讲义(提高编程)</a><time datetime="2022-12-24T04:17:15.000Z" title="发表于 2022-12-24 12:17:15">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(核心编程)"/></a><div class="content"><a class="title" href="/p/8628fdb1.html" title="黑马C++讲义(核心编程)">黑马C++讲义(核心编程)</a><time datetime="2022-12-24T04:09:21.000Z" title="发表于 2022-12-24 12:09:21">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/c861e813.html" title="黑马C++讲义(基础入门)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="黑马C++讲义(基础入门)"/></a><div class="content"><a class="title" href="/p/c861e813.html" title="黑马C++讲义(基础入门)">黑马C++讲义(基础入门)</a><time datetime="2022-12-24T04:02:03.000Z" title="发表于 2022-12-24 12:02:03">2022-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="openGL(FreeGlut和GLFW)环境配置"/></a><div class="content"><a class="title" href="/p/61e510ce.html" title="openGL(FreeGlut和GLFW)环境配置">openGL(FreeGlut和GLFW)环境配置</a><time datetime="2022-09-07T15:00:55.000Z" title="发表于 2022-09-07 23:00:55">2022-09-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Computer-Graphics/"><span class="card-category-list-name">Computer Graphics</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/"><span class="card-category-list-name">SQL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/VPS/"><span class="card-category-list-name">VPS</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"><span class="card-category-list-name">推荐系统</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">机器学习</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/"><span class="card-category-list-name">科学计算库</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/BP%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">BP算法</a> <a href="/tags/C/" style="font-size: 1.3em; color: #99a1ac">C++</a> <a href="/tags/CG-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-OpenGL-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.1em; color: #999">CG - 计算机图形学 - OpenGL - 环境配置</a> <a href="/tags/GAN/" style="font-size: 1.1em; color: #999">GAN</a> <a href="/tags/Github/" style="font-size: 1.1em; color: #999">Github</a> <a href="/tags/IPv6/" style="font-size: 1.1em; color: #999">IPv6</a> <a href="/tags/Keras/" style="font-size: 1.1em; color: #999">Keras</a> <a href="/tags/LateX/" style="font-size: 1.1em; color: #999">LateX</a> <a href="/tags/LeNet/" style="font-size: 1.1em; color: #999">LeNet</a> <a href="/tags/Linux/" style="font-size: 1.3em; color: #99a1ac">Linux</a> <a href="/tags/MinSt/" style="font-size: 1.1em; color: #999">MinSt</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Numpy/" style="font-size: 1.1em; color: #999">Numpy</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/TensorFlow/" style="font-size: 1.1em; color: #999">TensorFlow</a> <a href="/tags/VAE/" style="font-size: 1.1em; color: #999">VAE</a> <a href="/tags/VPS/" style="font-size: 1.2em; color: #999da3">VPS</a> <a href="/tags/Windows/" style="font-size: 1.1em; color: #999">Windows</a> <a href="/tags/WordPress/" style="font-size: 1.1em; color: #999">WordPress</a> <a href="/tags/centos/" style="font-size: 1.1em; color: #999">centos</a> <a href="/tags/git/" style="font-size: 1.1em; color: #999">git</a> <a href="/tags/rocky-linux/" style="font-size: 1.1em; color: #999">rocky linux</a> <a href="/tags/swap/" style="font-size: 1.1em; color: #999">swap</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 1.1em; color: #999">决策树</a> <a href="/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4/" style="font-size: 1.2em; color: #999da3">协同过滤</a> <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">卷积神经网络</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" style="font-size: 1.1em; color: #999">反向传播</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 1.1em; color: #999">宝塔面板</a> <a href="/tags/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">循环神经网络</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 1.1em; color: #999">感知机</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 1.4em; color: #99a5b6">推荐系统</a> <a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">无监督学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.5em; color: #99a9bf">机器学习</a> <a href="/tags/%E6%B0%B4%E6%96%87/" style="font-size: 1.1em; color: #999">水文</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.2em; color: #999da3">深度学习</a> <a href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" style="font-size: 1.2em; color: #999da3">监督学习</a> <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/" style="font-size: 1.1em; color: #999">矩阵分解</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.3em; color: #99a1ac">神经网络</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/" style="font-size: 1.2em; color: #999da3">科学计算库</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">六月 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">二月 2022</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">9</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">32</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-12-29T06:30:45.135Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">163.3k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-12-29T06:30:45.233Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 李忘生</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">welcome to my blog!😊</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function subtitleType () {
+  getScript('https://yijuzhan.com/api/word.php?m=js').then(() => {
+    const con = str[0]
+    if (true) {
+      const from = '出自 ' + str[1]
+      const sub = []
+      sub.unshift(con, from)
+      window.typed = new Typed('#subtitle', {
+        strings: sub,
+        startDelay: 300,
+        typeSpeed: 150,
+        loop: true,
+        backSpeed: 50,
+      })
+    } else {
+      document.getElementById('subtitle').innerHTML = con
+    }
+  })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
